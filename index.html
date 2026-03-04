@@ -320,6 +320,30 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 .news-card .nc-badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;padding:2px 7px;border-radius:3px;flex-shrink:0;white-space:nowrap;}
 .news-card .nc-text{font-size:.72rem;color:var(--text);line-height:1.5;word-break:break-word;white-space:normal;}
 
+/* ── TRADE LEVELS PANEL ── */
+.trade-levels{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 12px;}
+.tl-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.tl-dir{font-family:'Share Tech Mono',monospace;font-size:.9rem;font-weight:900;padding:2px 10px;border-radius:4px;flex-shrink:0;letter-spacing:.05em;}
+.tl-dir.long{background:rgba(0,255,136,.15);color:var(--green);border:1px solid rgba(0,255,136,.3);}
+.tl-dir.short{background:rgba(255,45,85,.12);color:var(--red);border:1px solid rgba(255,45,85,.3);}
+.tl-dir.wait{background:rgba(255,214,10,.1);color:var(--yellow);border:1px solid rgba(255,214,10,.25);}
+.tl-price{font-family:'Share Tech Mono',monospace;font-size:1.1rem;font-weight:bold;color:#fff;}
+.tl-chg{font-family:'Share Tech Mono',monospace;font-size:.65rem;margin-left:auto;}
+.tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.tl-box{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:6px 8px;text-align:center;position:relative;}
+.tl-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:5px 5px 0 0;}
+.tl-box.entry::before{background:var(--accent);}
+.tl-box.tp::before{background:var(--green);}
+.tl-box.sl::before{background:var(--red);}
+.tl-lbl{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px;}
+.tl-val{font-family:'Share Tech Mono',monospace;font-size:.82rem;font-weight:bold;}
+.tl-val.v-entry{color:var(--accent);}
+.tl-val.v-tp{color:var(--green);}
+.tl-val.v-sl{color:var(--red);}
+.tl-pct{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:var(--dim);margin-top:1px;}
+.tl-rr{font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);text-align:center;margin-top:4px;}
+.tl-rr span{color:var(--accent);}
+
 /* ── ENTRY TIMING PANEL ── */
 .entry-timing{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:10px;position:relative;overflow:hidden;transition:all .4s;}
 .entry-timing::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:background .4s;}
@@ -382,50 +406,103 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 
 /* MOBILE 680px */
 @media(max-width:680px){
-  .scalp-duo{grid-template-columns:1fr;}
-  .tf-row{grid-template-columns:repeat(3,1fr);}
+  .scalp-duo{grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
+  .sf{padding:8px 10px;}
+  .sf-sig{font-size:clamp(1.4rem,4vw,1.8rem);}
+  .sf-sc{font-size:.58rem;}
+  .sf-sub{font-size:.52rem;}
+  .sf-lbl{font-size:.48rem;margin-bottom:2px;}
+  .tf-row{grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:6px;}
+  .tfm{padding:5px 3px;}
+  .tm-l{font-size:.44rem;}
+  .tm-s{font-size:.72rem;}
+  .tm-n{font-size:.44rem;}
   .cgrid{grid-template-columns:1fr;}
   .news-ticker{display:none;}
   .news-cards{display:block;}
-  .sec{padding:10px 12px;}
-  .phero{padding:10px 12px;flex-direction:column;align-items:flex-start;gap:8px;}
-  .pills{margin-left:0;width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
-  .pill{min-width:0;}
-  .p-main{font-size:1.5rem;}
-  .topbar{padding:8px 12px;}
+  .sec{padding:8px 10px;}
+  .sec-t{font-size:.5rem;margin-bottom:6px;}
+  .phero{padding:6px 10px;flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap;}
+  .pills{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap;}
+  .pill{min-width:0;padding:3px 6px;font-size:.52rem;}
+  .pill-l{font-size:.46rem;}
+  .pill-v{font-size:.6rem;}
+  .p-main{font-size:1.2rem;}
+  .p-jpy{font-size:.62rem;}
+  .p-chg{font-size:.6rem;}
+  .topbar{padding:5px 10px;}
+  .logo{font-size:.62rem;}
+  .topbar-r{font-size:.56rem;gap:6px;}
   .api-status-bar{display:none;}
-  .inds{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;}
+  .inds{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:4px;}
+  .ind{padding:7px;}
+  .in-name{font-size:.48rem;}
+  .in-val{font-size:.78rem;}
+  .in-badge{font-size:.5rem;}
+  .in-why{font-size:.5rem;}
+  .in-src{font-size:.42rem;}
   .funda-grid{grid-template-columns:1fr;}
   .sg-grid{grid-template-columns:1fr;}
-  .funda-ai{padding:10px 12px;}
-  .chart-container{height:300px;}
-  #tradingview_btc{height:280px !important;}
-  .tradingview-widget-container{height:300px !important;}
-  .sc{padding:12px;min-height:44px;}
-  .bottom{padding:8px 12px;flex-direction:column;gap:4px;}
-  .fai-card{padding:10px 12px;flex-direction:column;gap:6px;}
-  .fai-rank{width:auto;}
-  .ev{flex-direction:column;gap:6px;}
+  .funda-ai{padding:8px 10px;}
+  .chart-container{height:280px;}
+  #tradingview_btc{height:260px !important;}
+  .tradingview-widget-container{height:280px !important;}
+  .sc{padding:10px;min-height:38px;}
+  .bottom{padding:6px 10px;flex-direction:column;gap:3px;font-size:.5rem;}
+  .fai-card{padding:8px 10px;flex-direction:column;gap:4px;}
+  .fai-rank{width:auto;font-size:.9rem;}
+  .fai-name{font-size:.72rem;}
+  .fai-desc{font-size:.62rem;}
+  .ev{flex-direction:column;gap:4px;padding:7px 10px;}
   .ev-cd{text-align:left;}
-  .bsig-row{grid-template-columns:1fr;gap:12px;}
-  .bsig-right{display:flex;align-items:center;gap:12px;justify-content:flex-start;}
-  .et-main{grid-template-columns:1fr;gap:10px;text-align:center;}
-  .et-score-circle{margin:0 auto;}
-  .et-indicators{grid-template-columns:repeat(2,1fr);}
-  .level-pills{grid-template-columns:repeat(5,1fr);font-size:.46rem;}
+  .big-signal-wrap{padding:10px 12px;margin-bottom:6px;border-radius:8px;}
+  .bsig-row{grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;}
+  .bsig-verdict{font-size:clamp(1rem,2.5vw,1.3rem);margin-bottom:3px;}
+  .bsig-action{font-size:.6rem;line-height:1.3;display:none;}
+  .bsig-tf-lbl{font-size:.46rem;margin-bottom:2px;}
+  .dial-wrap{width:70px;height:44px;}
+  .dial-num{font-size:1.1rem;}
+  .dial-lbl{font-size:.44rem;}
+  .strength-section{margin-bottom:8px;}
+  .strength-label{font-size:.48rem;margin-bottom:3px;}
+  .strength-track{height:10px;}
+  .level-pills{grid-template-columns:repeat(5,1fr);font-size:.4rem;gap:3px;margin-top:4px;}
+  .lp{padding:3px 1px;}
+  .entry-timing{padding:10px 12px;margin-bottom:6px;}
+  .et-header{margin-bottom:6px;}
+  .et-title{font-size:.48rem;}
+  .et-badge{font-size:.58rem;padding:2px 7px;}
+  .et-main{grid-template-columns:auto 1fr;gap:8px;margin-bottom:6px;text-align:left;}
+  .et-score-circle{width:50px;height:50px;}
+  .et-score-num{font-size:.95rem;}
+  .et-msg{font-size:.65rem;}
+  .et-indicators{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px;}
+  .et-ind{padding:4px 5px;}
+  .et-ind-label{font-size:.42rem;}
+  .et-ind-val{font-size:.65rem;}
+  .et-reasons{gap:3px;}
+  .et-reason{font-size:.48rem;padding:1px 5px;}
+  .conflict{padding:6px 10px;margin-bottom:6px;font-size:.6rem;}
+  .conflict-t{font-size:.62rem;margin-bottom:1px;}
   .mov{backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .news-cards{padding:6px 10px;}
+  .trade-levels{padding:6px 10px;}
+  .tl-dir{font-size:.75rem;padding:2px 8px;}
+  .tl-price{font-size:.9rem;}
+  .tl-box{padding:4px 5px;}
+  .tl-lbl{font-size:.44rem;}
+  .tl-val{font-size:.72rem;}
+  .tl-pct{font-size:.44rem;}
+  .tl-rr{font-size:.46rem;margin-top:2px;}
 }
 
 /* SMALL PHONE 480px */
 @media(max-width:480px){
-  .tf-row{grid-template-columns:repeat(2,1fr);}
-  .inds{grid-template-columns:repeat(2,1fr);}
-  .pills{grid-template-columns:1fr;}
-  .level-pills{grid-template-columns:repeat(3,1fr);}
-  .lp:nth-child(4),.lp:nth-child(5){grid-column:span 1;}
-  .p-main{font-size:1.3rem;}
-  .logo{font-size:.65rem;}
+  .inds{grid-template-columns:repeat(3,1fr);}
+  .pills{display:none;}
+  .p-main{font-size:1.1rem;}
   .logo span{display:none;}
+  .et-indicators{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
@@ -448,6 +525,33 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
     <span class="green">JST</span>
     <span class="dim">更新: <span id="nxtUpd">20s</span></span>
   </div>
+</div>
+
+<!-- TRADE LEVELS -->
+<div class="trade-levels" id="tradeLevels">
+  <div class="tl-row">
+    <div class="tl-dir wait" id="tlDir">WAIT</div>
+    <div class="tl-price" id="tlPrice">$--</div>
+    <div class="tl-chg" id="tlChg"></div>
+  </div>
+  <div class="tl-grid">
+    <div class="tl-box entry">
+      <div class="tl-lbl">Entry</div>
+      <div class="tl-val v-entry" id="tlEntry">$--</div>
+      <div class="tl-pct" id="tlEntryPct">--</div>
+    </div>
+    <div class="tl-box tp">
+      <div class="tl-lbl">Take Profit</div>
+      <div class="tl-val v-tp" id="tlTp">$--</div>
+      <div class="tl-pct" id="tlTpPct">--</div>
+    </div>
+    <div class="tl-box sl">
+      <div class="tl-lbl">Stop Loss</div>
+      <div class="tl-val v-sl" id="tlSl">$--</div>
+      <div class="tl-pct" id="tlSlPct">--</div>
+    </div>
+  </div>
+  <div class="tl-rr" id="tlRR">R:R = <span>--</span></div>
 </div>
 
 <!-- NEWS TICKER -->
@@ -1089,6 +1193,7 @@ const S = {
   tfSig:{}, tfScore:{}, tfInds:{},
   rsi1:50, rsi5:50, rsi15:50,
   entryTiming: {phase:'WAIT', score:50, rsi1m:50, momentum:'neutral', volSpike:false, decel:false, msg:''},
+  tradeLevels: {dir:'WAIT', entry:0, tp:0, sl:0, rrRatio:0},
 };
 
 const TFCFG = {
@@ -1412,6 +1517,103 @@ function computeEntryTiming(){
 }
 
 // ═══════════════════════════════════════════════
+// TRADE LEVELS — Entry / TP / SL calculation
+// ═══════════════════════════════════════════════
+function computeTradeLevels(){
+  const sig5m=S.tfSig['5m']||'WAIT';
+  const price=S.price;
+  if(!price||price<=0)return;
+
+  // Use 5m klines for ATR and support/resistance
+  const kl=S.k5;
+  if(!kl||kl.length<20){
+    S.tradeLevels={dir:sig5m,entry:price,tp:0,sl:0,rrRatio:0};
+    return;
+  }
+
+  // Calculate ATR (14-period on 5m)
+  let atrSum=0;
+  for(let i=kl.length-14;i<kl.length;i++){
+    const h=parseFloat(kl[i][2]),l=parseFloat(kl[i][3]);
+    const pc=i>0?parseFloat(kl[i-1][4]):l;
+    atrSum+=Math.max(h-l,Math.abs(h-pc),Math.abs(l-pc));
+  }
+  const atr=atrSum/14;
+
+  // Recent swing high/low (last 30 candles)
+  const recent=kl.slice(-30);
+  const highs=recent.map(k=>parseFloat(k[2]));
+  const lows=recent.map(k=>parseFloat(k[3]));
+  const swingHigh=Math.max(...highs);
+  const swingLow=Math.min(...lows);
+
+  let entry,tp,sl;
+
+  if(sig5m==='LONG'){
+    // Entry: current price (or slightly below if 1m shows still dropping)
+    const et=S.entryTiming;
+    entry=(et.phase==='EARLY')?price-atr*0.3:price;
+    // TP: nearest swing high or 2x ATR above entry
+    tp=Math.max(swingHigh, entry+atr*2.5);
+    // SL: below recent swing low or 1.5x ATR below entry
+    sl=Math.min(swingLow, entry-atr*1.5);
+  } else if(sig5m==='SHORT'){
+    const et=S.entryTiming;
+    entry=(et.phase==='EARLY')?price+atr*0.3:price;
+    tp=Math.min(swingLow, entry-atr*2.5);
+    sl=Math.max(swingHigh, entry+atr*1.5);
+  } else {
+    entry=price;tp=0;sl=0;
+  }
+
+  const reward=Math.abs(tp-entry);
+  const risk=Math.abs(sl-entry);
+  const rrRatio=risk>0?(reward/risk):0;
+
+  S.tradeLevels={dir:sig5m,entry,tp,sl,rrRatio,atr};
+}
+
+function renderTradeLevels(){
+  const tl=S.tradeLevels;
+  if(!tl)return;
+  const price=S.price;
+
+  // Direction badge
+  const dirEl=document.getElementById('tlDir');
+  dirEl.textContent=tl.dir;
+  dirEl.className='tl-dir '+(tl.dir==='LONG'?'long':tl.dir==='SHORT'?'short':'wait');
+
+  // Current price
+  document.getElementById('tlPrice').textContent='$'+price.toLocaleString('en',{maximumFractionDigits:0});
+  const pct=S.p24h>0?(price-S.p24h)/S.p24h*100:0;
+  const chgEl=document.getElementById('tlChg');
+  chgEl.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%';
+  chgEl.style.color=pct>=0?'var(--green)':'var(--red)';
+
+  if(tl.dir==='WAIT'||!tl.tp||!tl.sl){
+    document.getElementById('tlEntry').textContent='--';
+    document.getElementById('tlTp').textContent='--';
+    document.getElementById('tlSl').textContent='--';
+    document.getElementById('tlEntryPct').textContent='シグナル待ち';
+    document.getElementById('tlTpPct').textContent='--';
+    document.getElementById('tlSlPct').textContent='--';
+    document.getElementById('tlRR').innerHTML='シグナル発生後に算出';
+    return;
+  }
+
+  const fmt=v=>'$'+v.toLocaleString('en',{maximumFractionDigits:0});
+  const pctFmt=(v,base)=>{const p=((v-base)/base*100);return(p>=0?'+':'')+p.toFixed(2)+'%';};
+
+  document.getElementById('tlEntry').textContent=fmt(tl.entry);
+  document.getElementById('tlTp').textContent=fmt(tl.tp);
+  document.getElementById('tlSl').textContent=fmt(tl.sl);
+  document.getElementById('tlEntryPct').textContent=pctFmt(tl.entry,price);
+  document.getElementById('tlTpPct').textContent=pctFmt(tl.tp,tl.entry);
+  document.getElementById('tlSlPct').textContent=pctFmt(tl.sl,tl.entry);
+  document.getElementById('tlRR').innerHTML='R:R = <span>1 : '+tl.rrRatio.toFixed(1)+'</span>';
+}
+
+// ═══════════════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════════════
 function renderAll(){
@@ -1425,6 +1627,8 @@ function renderAll(){
   renderScalpHero();
   computeEntryTiming();
   renderEntryTiming();
+  computeTradeLevels();
+  renderTradeLevels();
   renderTfRow();
   renderConflict();
   renderInds();
@@ -1835,6 +2039,8 @@ function startTimer(){
       if(d)S.k1m=d;
       computeEntryTiming();
       renderEntryTiming();
+      computeTradeLevels();
+      renderTradeLevels();
     }catch(_){}
   },15000);
 }
@@ -1868,6 +2074,7 @@ function connectWS(){
         S.p24h=newPrice/(1+parseFloat(d.P)/100);
         // Update price display
         renderPrice();
+        renderTradeLevels();
         // Flash effect
         var pEl=document.getElementById('priceUsd');
         if(pEl){
