@@ -14,7 +14,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);pointer-events:none;z-index:9998;}
+@media(min-width:681px){body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px);pointer-events:none;z-index:9998;}}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
@@ -24,7 +24,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .ticker-label{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--accent);padding:0 14px;flex-shrink:0;border-right:1px solid var(--border);height:100%;display:flex;align-items:center;gap:5px;background:var(--bg2);z-index:2;letter-spacing:.1em;}
 .ticker-label .dot{width:5px;height:5px;background:var(--accent);box-shadow:0 0 5px var(--accent);}
 .ticker-scroll-wrap{flex:1;overflow:hidden;height:100%;position:relative;}
-.ticker-scroll{display:flex;align-items:center;gap:0;height:100%;white-space:nowrap;animation:tickerMove 60s linear infinite;}
+.ticker-scroll{display:flex;align-items:center;gap:0;height:100%;white-space:nowrap;animation:tickerMove 60s linear infinite;will-change:transform;-webkit-transform:translateZ(0);transform:translateZ(0);}
 .ticker-scroll:hover{animation-play-state:paused;}
 @keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.68rem;color:var(--text);border-right:1px solid rgba(30,45,61,.6);height:100%;}
@@ -308,10 +308,85 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 .blink{animation:blink .8s infinite;}
 
+/* NEWS CARDS (mobile vertical layout) */
+.news-cards{display:none;padding:10px 12px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.news-cards .nc-title{font-family:'Share Tech Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.25em;color:var(--dim);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.news-cards .nc-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.news-card{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:6px;margin-bottom:6px;border-left:3px solid var(--border);min-height:44px;}
+.news-card.nc-up{border-left-color:var(--green);}
+.news-card.nc-down{border-left-color:var(--red);}
+.news-card.nc-neut{border-left-color:var(--yellow);}
+.news-card.nc-info{border-left-color:var(--accent);}
+.news-card .nc-badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;padding:2px 7px;border-radius:3px;flex-shrink:0;white-space:nowrap;}
+.news-card .nc-text{font-size:.72rem;color:var(--text);line-height:1.5;word-break:break-word;white-space:normal;}
+
+/* PRICE FLASH */
+@keyframes priceFlashGreen{0%{background:rgba(0,255,136,.2)}100%{background:transparent}}
+@keyframes priceFlashRed{0%{background:rgba(255,45,85,.2)}100%{background:transparent}}
+.price-flash-up{animation:priceFlashGreen .5s ease-out;}
+.price-flash-down{animation:priceFlashRed .5s ease-out;}
+
+/* WS STATUS */
+.ws-badge{font-family:'Share Tech Mono',monospace;font-size:.5rem;padding:1px 5px;border-radius:2px;letter-spacing:.08em;}
+.ws-badge.ws-live{background:rgba(0,255,136,.12);color:var(--green);border:1px solid rgba(0,255,136,.25);}
+.ws-badge.ws-poll{background:rgba(255,214,10,.1);color:var(--yellow);border:1px solid rgba(255,214,10,.2);}
+
+/* MATRIX SCROLL WRAPPER */
+.mt-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  .ticker-scroll{animation:none !important;}
+  .dot{animation:none !important;}
+  .blink{animation:none !important;}
+  .ind.hot{animation:none !important;}
+  .big-signal-wrap.extreme-short,.big-signal-wrap.extreme-long{animation:none !important;}
+  .strength-fill,.sf-fill,.bar-f{transition:none !important;}
+}
+
+/* MOBILE 680px */
 @media(max-width:680px){
   .scalp-duo{grid-template-columns:1fr;}
   .tf-row{grid-template-columns:repeat(3,1fr);}
   .cgrid{grid-template-columns:1fr;}
+  .news-ticker{display:none;}
+  .news-cards{display:block;}
+  .sec{padding:10px 12px;}
+  .phero{padding:10px 12px;flex-direction:column;align-items:flex-start;gap:8px;}
+  .pills{margin-left:0;width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
+  .pill{min-width:0;}
+  .p-main{font-size:1.5rem;}
+  .topbar{padding:8px 12px;}
+  .api-status-bar{display:none;}
+  .inds{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;}
+  .funda-grid{grid-template-columns:1fr;}
+  .sg-grid{grid-template-columns:1fr;}
+  .funda-ai{padding:10px 12px;}
+  .chart-container{height:300px;}
+  #tradingview_btc{height:280px !important;}
+  .tradingview-widget-container{height:300px !important;}
+  .sc{padding:12px;min-height:44px;}
+  .bottom{padding:8px 12px;flex-direction:column;gap:4px;}
+  .fai-card{padding:10px 12px;flex-direction:column;gap:6px;}
+  .fai-rank{width:auto;}
+  .ev{flex-direction:column;gap:6px;}
+  .ev-cd{text-align:left;}
+  .bsig-row{grid-template-columns:1fr;gap:12px;}
+  .bsig-right{display:flex;align-items:center;gap:12px;justify-content:flex-start;}
+  .level-pills{grid-template-columns:repeat(5,1fr);font-size:.46rem;}
+  .mov{backdrop-filter:none;-webkit-backdrop-filter:none;}
+}
+
+/* SMALL PHONE 480px */
+@media(max-width:480px){
+  .tf-row{grid-template-columns:repeat(2,1fr);}
+  .inds{grid-template-columns:repeat(2,1fr);}
+  .pills{grid-template-columns:1fr;}
+  .level-pills{grid-template-columns:repeat(3,1fr);}
+  .lp:nth-child(4),.lp:nth-child(5){grid-column:span 1;}
+  .p-main{font-size:1.3rem;}
+  .logo{font-size:.65rem;}
+  .logo span{display:none;}
 }
 </style>
 </head>
@@ -329,6 +404,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   <div class="logo">⬡ BTC先物 スキャルシグナル <span style="color:var(--dim);font-size:.62rem;">— スキャルピング特化</span></div>
   <div class="topbar-r">
     <span><span class="dot" id="apiDot"></span><span id="apiSt">LIVE</span></span>
+    <span class="ws-badge ws-poll" id="wsBadge">WS: --</span>
     <span id="clk">18:59:06</span>
     <span class="green">JST</span>
     <span class="dim">更新: <span id="nxtUpd">20s</span></span>
@@ -382,6 +458,12 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
       <span>月末リバランス接近 — 機関の売り圧力が出やすい時期</span>
     </div></div>
   </div>
+</div>
+
+<!-- NEWS CARDS (mobile) -->
+<div class="news-cards" id="newsCards">
+  <div class="nc-title">BTC NEWS <span class="live-b">LIVE</span></div>
+  <div id="newsCardsList"></div>
 </div>
 
 <!-- API STATUS BAR -->
@@ -554,35 +636,42 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   <div class="sec-t">リアルタイムチャート (TradingView) — 5分足</div>
   <div class="chart-wrap">
     <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container" style="height:460px;width:100%;">
-      <div id="tradingview_btc" style="height:440px;width:100%;"><div id="tradingview_b7b6e-wrapper" style="position: relative; box-sizing: content-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Trebuchet MS&quot;, Roboto, Ubuntu, sans-serif; margin: 0px auto !important; padding: 0px !important; width: 100%; height: calc(408px);"><iframe title="advanced chart TradingView widget" lang="en" id="tradingview_b7b6e" frameborder="0" allowtransparency="true" scrolling="no" allowfullscreen="true" src="./BTC先物 スキャルシグナル20260304_files/saved_resource.html" style="width: 100%; height: 100%; margin: 0px !important; padding: 0px !important;"></iframe></div></div>
-      <div class="tradingview-widget-copyright" style="font-size: 0.55rem; color: var(--dim); padding: 2px 4px; width: 100%;">
-        <a href="https://www.tradingview.com/?utm_source=&amp;utm_medium=widget_new&amp;utm_campaign=chart&amp;utm_term=BINANCE%3ABTCUSDT" style="color:var(--dim);">BTC/USDT チャート by TradingView</a>
+    <div class="tradingview-widget-container chart-container" style="width:100%;">
+      <div id="tradingview_btc" style="width:100%;"></div>
+      <div class="tradingview-widget-copyright" style="font-size:0.55rem;color:var(--dim);padding:2px 4px;width:100%;">
+        <a href="https://www.tradingview.com/" style="color:var(--dim);">BTC/USDT by TradingView</a>
       </div>
     </div>
-    <script type="text/javascript" src="./BTC先物 スキャルシグナル20260304_files/tv.js.ダウンロード"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
-    new TradingView.widget({
-      "width": "100%",
-      "height": 440,
-      "symbol": "BINANCE:BTCUSDT",
-      "interval": "5",
-      "timezone": "Asia/Tokyo",
-      "theme": "dark",
-      "style": "1",
-      "locale": "ja",
-      "toolbar_bg": "#0d1117",
-      "enable_publishing": false,
-      "hide_top_toolbar": false,
-      "hide_legend": false,
-      "save_image": false,
-      "container_id": "tradingview_btc",
-      "studies": ["RSI@tv-basicstudies","MACD@tv-basicstudies","BB@tv-basicstudies"]
-    });
+    function initTVChart(){
+      if(typeof TradingView==='undefined'){setTimeout(initTVChart,500);return;}
+      var h=window.innerWidth<=680?280:440;
+      document.getElementById('tradingview_btc').style.height=h+'px';
+      new TradingView.widget({
+        "width":"100%",
+        "height":h,
+        "symbol":"BINANCE:BTCUSDT",
+        "interval":"5",
+        "timezone":"Asia/Tokyo",
+        "theme":"dark",
+        "style":"1",
+        "locale":"ja",
+        "toolbar_bg":"#0d1117",
+        "enable_publishing":false,
+        "hide_top_toolbar":window.innerWidth<=680,
+        "hide_legend":false,
+        "save_image":false,
+        "container_id":"tradingview_btc",
+        "autosize":false,
+        "studies":window.innerWidth>680?["RSI@tv-basicstudies","MACD@tv-basicstudies","BB@tv-basicstudies"]:["RSI@tv-basicstudies"]
+      });
+    }
+    initTVChart();
     </script>
     <!-- TradingView Widget END -->
   </div>
-</div><style>.tradingview-widget-copyright {font-size: 13px !important; line-height: 32px !important; text-align: center !important; vertical-align: middle !important; font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important; color: #B2B5BE !important;} .tradingview-widget-copyright .blue-text {color: #2962FF !important;} .tradingview-widget-copyright a {text-decoration: none !important; color: #B2B5BE !important;} .tradingview-widget-copyright a:visited {color: #B2B5BE !important;} .tradingview-widget-copyright a:hover .blue-text {color: #1E53E5 !important;} .tradingview-widget-copyright a:active .blue-text {color: #1848CC !important;} .tradingview-widget-copyright a:visited .blue-text {color: #2962FF !important;}</style>
+</div>
 
 <!-- FUNDA -->
 <div class="sec">
@@ -731,7 +820,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <!-- MATRIX -->
 <div class="sec">
   <div class="sec-t">複合シグナルマトリクス <span class="live-b">LIVE</span></div>
-  <table class="mt">
+  <div class="mt-wrap"><table class="mt">
     <thead><tr><th>指標</th><th>現在値</th><th>しきい値</th><th>状態</th><th>示唆</th><th>ソース</th></tr></thead>
     <tbody id="matrixBody">
       <tr><td>BTC価格</td><td class="dim" id="mx-p">$71,481</td><td>—</td><td><span class="dim">---</span></td><td class="dim">基準値</td><td class="dim" style="font-size:.56rem;">Binance REST</td></tr>
@@ -743,7 +832,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
       <tr><td>清算ゾーン↑</td><td class="dim" id="mx-liq">$73,268</td><td>—</td><td><span class="dim">推定値</span></td><td class="dim">SHORT磁石</td><td class="dim" style="font-size:.56rem;">価格×1.025</td></tr>
       <tr><td>ETFフロー週計</td><td class="green">+$407M</td><td>—</td><td><span class="green">✓ 純流入</span></td><td class="dim">機関が買い越し</td><td class="dim" style="font-size:.56rem;">手動更新</td></tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 <!-- STRATEGY -->
@@ -1425,13 +1514,82 @@ async function fullFetch(){
 
 function startTimer(){
   if(timerInt)clearInterval(timerInt);
-  nxtTimer=30;
+  nxtTimer=60;
   timerInt=setInterval(()=>{
     nxtTimer--;
-    document.getElementById('nxtUpd').textContent=nxtTimer+'s';
-    if(nxtTimer<=0){fullFetch();nxtTimer=30;}
+    if(!wsConnected) document.getElementById('nxtUpd').textContent=nxtTimer+'s';
+    if(nxtTimer<=0){fullFetch();nxtTimer=60;}
   },1000);
 }
+
+// ═══════════════════════════════════════════════
+// WEBSOCKET — real-time price from Binance
+// ═══════════════════════════════════════════════
+let ws=null, wsConnected=false, wsRetries=0;
+const WS_MAX_RETRIES=10;
+
+function connectWS(){
+  if(ws && (ws.readyState===WebSocket.OPEN||ws.readyState===WebSocket.CONNECTING))return;
+  try{
+    ws=new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
+  }catch(e){scheduleReconnect();return;}
+
+  ws.onopen=function(){
+    wsConnected=true; wsRetries=0;
+    var b=document.getElementById('wsBadge');
+    if(b){b.textContent='WS: LIVE';b.className='ws-badge ws-live';}
+    document.getElementById('nxtUpd').textContent='LIVE';
+  };
+
+  ws.onmessage=function(evt){
+    try{
+      var d=JSON.parse(evt.data);
+      var newPrice=parseFloat(d.c);
+      var oldPrice=S.price;
+      if(newPrice>0 && newPrice!==oldPrice){
+        S.price=newPrice;
+        S.p24h=newPrice/(1+parseFloat(d.P)/100);
+        // Update price display
+        renderPrice();
+        // Flash effect
+        var pEl=document.getElementById('priceUsd');
+        if(pEl){
+          pEl.classList.remove('price-flash-up','price-flash-down');
+          void pEl.offsetWidth; // force reflow
+          pEl.classList.add(newPrice>oldPrice?'price-flash-up':'price-flash-down');
+        }
+      }
+    }catch(e){}
+  };
+
+  ws.onclose=function(){
+    wsConnected=false;
+    var b=document.getElementById('wsBadge');
+    if(b){b.textContent='WS: OFF';b.className='ws-badge ws-poll';}
+    scheduleReconnect();
+  };
+
+  ws.onerror=function(){
+    wsConnected=false;
+    ws.close();
+  };
+}
+
+function scheduleReconnect(){
+  if(wsRetries>=WS_MAX_RETRIES)return;
+  wsRetries++;
+  var delay=Math.min(2000*Math.pow(2,wsRetries-1),30000);
+  setTimeout(connectWS,delay);
+}
+
+// Visibility change: reconnect when tab becomes visible
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden){
+    if(!wsConnected)connectWS();
+    // Also do a full fetch when returning to tab
+    fullFetch();
+  }
+});
 
 async function init(){
   setLoad(10,'BTC価格 取得中 (Binance)...');
@@ -1461,12 +1619,27 @@ async function init(){
   },500);
   setInterval(fullFetch, 5*60*1000);
   startTimer();
+  // Start WebSocket for real-time price
+  connectWS();
 }
 init();
 
 // ═══════════════════════════════════════════════
 // NEWS TICKER — RSS via rss2json (free, no key needed)
 // ═══════════════════════════════════════════════
+
+// Store news items for mobile card rendering
+let lastNewsItems = [];
+
+function renderNewsCards(items) {
+  const list = document.getElementById('newsCardsList');
+  if (!list) return;
+  list.innerHTML = items.map(it => `
+    <div class="news-card nc-${it.cls}">
+      <span class="nc-badge ticker-badge ${it.cls}">${it.badge}</span>
+      <span class="nc-text">${it.text}</span>
+    </div>`).join('');
+}
 
 // Impact classifier based on keywords in title
 function classifyImpact(title) {
@@ -1517,6 +1690,9 @@ async function loadNewsTicker() {
     ];
   }
 
+  // Save items for mobile cards
+  lastNewsItems = items;
+
   // Build ticker (double for seamless loop)
   const makeItems = (arr) => arr.map(it => `
     <div class="ticker-item">
@@ -1529,6 +1705,9 @@ async function loadNewsTicker() {
   document.getElementById('newsLoadMsg').style.display = 'none';
   scroll.style.display = 'flex';
   scroll.style.animationDuration = (items.length * 18 + 20) + 's';
+
+  // Also render mobile cards
+  renderNewsCards(items);
 }
 
 // ═══════════════════════════════════════════════
