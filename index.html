@@ -312,6 +312,170 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   .scalp-duo{grid-template-columns:1fr;}
   .tf-row{grid-template-columns:repeat(3,1fr);}
   .cgrid{grid-template-columns:1fr;}
+  .topbar{padding:8px 12px;font-size:.7rem;}
+  .logo{font-size:.65rem;}
+  .phero{padding:10px 12px;gap:10px;}
+  .p-main{font-size:1.4rem;}
+  .pills{gap:5px;}
+  .pill{min-width:66px;padding:4px 7px;}
+  .sec{padding:10px 12px;}
+  .api-status-bar{padding:5px 12px;font-size:.52rem;gap:5px;}
+  .bsig-row{grid-template-columns:1fr;gap:12px;}
+  .bsig-right{display:flex;align-items:center;gap:12px;text-align:left;}
+  .dial-wrap{width:80px;height:48px;}
+  .level-pills{grid-template-columns:repeat(5,1fr);gap:3px;}
+  .lp{font-size:.46rem;padding:4px 1px;}
+  .inds{grid-template-columns:repeat(2,1fr);gap:6px;}
+  .funda-grid{grid-template-columns:1fr;}
+  .sg-grid{grid-template-columns:1fr;}
+  .mt{font-size:.58rem;}
+  .mt th,.mt td{padding:4px 5px;}
+  .bottom{padding:8px 12px;font-size:.52rem;}
+  .ev{flex-direction:column;gap:6px;}
+  .ev-cd{text-align:left;}
+  .fai-card{flex-direction:column;gap:8px;}
+  .fai-rank{width:auto;}
+  .tradingview-widget-container{height:320px!important;}
+  #tradingview_btc{height:300px!important;}
+  .news-ticker{height:28px;}
+  .ticker-item{font-size:.6rem;padding:0 16px;}
+}
+
+/* ── CHAT FAB & PANEL ── */
+.chat-fab{
+  position:fixed;bottom:24px;right:24px;z-index:150;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),#0088cc);
+  border:none;color:#fff;font-size:1.5rem;
+  cursor:pointer;box-shadow:0 4px 20px rgba(0,212,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.chat-fab:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(0,212,255,.6);}
+.chat-fab.active{background:var(--red);box-shadow:0 4px 20px rgba(255,45,85,.4);}
+.chat-fab .badge{
+  position:absolute;top:-2px;right:-2px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--green);color:var(--bg);
+  font-size:.55rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  animation:dp 1.5s infinite;
+}
+
+.chat-panel{
+  position:fixed;bottom:0;left:0;right:0;z-index:160;
+  max-height:0;overflow:hidden;
+  background:var(--bg2);
+  border-top:2px solid var(--accent);
+  border-radius:16px 16px 0 0;
+  box-shadow:0 -8px 40px rgba(0,0,0,.6);
+  transition:max-height .4s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+.chat-panel.open{max-height:75vh;}
+
+.chat-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:var(--bg3);
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;border-radius:16px 16px 0 0;
+  cursor:grab;
+}
+.chat-header-left{display:flex;align-items:center;gap:8px;}
+.chat-title{font-family:'Share Tech Mono',monospace;font-size:.76rem;color:var(--accent);letter-spacing:.08em;}
+.chat-status{font-size:.55rem;color:var(--green);font-family:'Share Tech Mono',monospace;}
+.chat-close{background:none;border:none;color:var(--dim);font-size:1.2rem;cursor:pointer;padding:4px;}
+.chat-close:hover{color:var(--red);}
+
+.chat-body{
+  flex:1;overflow-y:auto;padding:12px;
+  display:flex;flex-direction:column;gap:10px;
+  min-height:200px;max-height:calc(75vh - 140px);
+}
+
+.chat-msg{
+  max-width:88%;padding:10px 14px;border-radius:12px;
+  font-size:.78rem;line-height:1.6;
+  animation:chatFadeIn .3s ease;
+}
+@keyframes chatFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.bot{
+  align-self:flex-start;
+  background:var(--bg3);border:1px solid var(--border);
+  border-bottom-left-radius:4px;
+  color:var(--text);
+}
+.chat-msg.user{
+  align-self:flex-end;
+  background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(0,136,204,.1));
+  border:1px solid rgba(0,212,255,.3);
+  border-bottom-right-radius:4px;
+  color:#fff;
+}
+.chat-msg .msg-label{
+  font-family:'Share Tech Mono',monospace;font-size:.52rem;
+  color:var(--dim);margin-bottom:4px;letter-spacing:.08em;
+}
+.chat-msg .signal-tag{
+  display:inline-block;padding:2px 6px;border-radius:3px;
+  font-family:'Share Tech Mono',monospace;font-size:.6rem;
+  font-weight:700;margin:2px 2px 2px 0;
+}
+.chat-msg .signal-tag.long{background:rgba(0,255,136,.12);color:var(--green);border:1px solid rgba(0,255,136,.25);}
+.chat-msg .signal-tag.short{background:rgba(255,45,85,.1);color:var(--red);border:1px solid rgba(255,45,85,.25);}
+.chat-msg .signal-tag.wait{background:rgba(255,214,10,.1);color:var(--yellow);border:1px solid rgba(255,214,10,.25);}
+.chat-msg .signal-tag.info{background:rgba(0,212,255,.08);color:var(--accent);border:1px solid rgba(0,212,255,.18);}
+
+.chat-quick{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:10px 12px;border-top:1px solid var(--border);
+  flex-shrink:0;background:var(--bg3);
+}
+.chat-quick-btn{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:6px 12px;
+  font-size:.68rem;color:var(--text);cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
+  transition:all .2s;white-space:nowrap;
+}
+.chat-quick-btn:hover,.chat-quick-btn:active{
+  border-color:var(--accent);color:var(--accent);
+  background:rgba(0,212,255,.08);
+}
+.chat-input-row{
+  display:flex;gap:8px;padding:10px 12px;
+  border-top:1px solid var(--border);
+  flex-shrink:0;background:var(--bg2);
+}
+.chat-input{
+  flex:1;background:var(--bg3);border:1px solid var(--border);
+  border-radius:20px;padding:8px 14px;
+  color:var(--text);font-size:.78rem;
+  font-family:'Noto Sans JP',sans-serif;
+  outline:none;
+}
+.chat-input:focus{border-color:var(--accent);}
+.chat-input::placeholder{color:var(--dim);}
+.chat-send{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--accent);border:none;color:var(--bg);
+  font-size:1rem;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.chat-send:hover{background:#00b8e6;}
+.chat-send:disabled{background:var(--border);cursor:default;}
+.typing-dots{display:flex;gap:4px;padding:4px 0;}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:typingBounce 1.2s infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+@media(min-width:681px){
+  .chat-panel{left:auto;width:400px;right:24px;bottom:90px;border-radius:16px;max-height:0;}
+  .chat-panel.open{max-height:560px;}
+  .chat-header{border-radius:16px 16px 0 0;}
+  .chat-fab{bottom:24px;right:24px;}
 }
 </style>
 </head>
@@ -903,6 +1067,36 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   <div class="mbox">
     <div class="mhead"><span class="mt2" id="mTitle">戦略詳細</span><button class="mcl" onclick="closeMD()">✕</button></div>
     <div class="mbody" id="mBody"></div>
+  </div>
+</div>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+  <span id="chatFabIcon">💬</span>
+  <div class="badge" id="chatBadge">!</div>
+</button>
+
+<!-- CHAT PANEL -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <span class="chat-title">⬡ シグナルアシスタント</span>
+      <span class="chat-status"><span class="dot" style="width:5px;height:5px;margin-right:3px;"></span>LIVE</span>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="chatQuick">
+    <button class="chat-quick-btn" onclick="askChat('今のシグナルは？')">今のシグナルは？</button>
+    <button class="chat-quick-btn" onclick="askChat('エントリーすべき？')">エントリーすべき？</button>
+    <button class="chat-quick-btn" onclick="askChat('リスクは？')">リスクは？</button>
+    <button class="chat-quick-btn" onclick="askChat('指標まとめ')">指標まとめ</button>
+    <button class="chat-quick-btn" onclick="askChat('ファンダは？')">ファンダは？</button>
+    <button class="chat-quick-btn" onclick="askChat('おすすめ戦略')">おすすめ戦略</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="質問を入力..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">▶</button>
   </div>
 </div>
 
@@ -1663,6 +1857,325 @@ function openM(k){
 }
 function closeMOv(e){if(e.target===document.getElementById('mOv'))closeMD();}
 function closeMD(){document.getElementById('mOv').classList.remove('show');}
+
+// ═══════════════════════════════════════════════
+// CHAT ASSISTANT
+// ═══════════════════════════════════════════════
+let chatOpen = false;
+let chatInited = false;
+
+function toggleChat(){
+  chatOpen = !chatOpen;
+  document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+  document.getElementById('chatFab').classList.toggle('active', chatOpen);
+  document.getElementById('chatFabIcon').textContent = chatOpen ? '✕' : '💬';
+  document.getElementById('chatBadge').style.display = chatOpen ? 'none' : 'flex';
+  if(chatOpen && !chatInited){
+    chatInited = true;
+    addMsg(chatGreeting(), 'bot');
+  }
+  if(chatOpen){
+    setTimeout(()=>{
+      const body = document.getElementById('chatBody');
+      body.scrollTop = body.scrollHeight;
+      document.getElementById('chatInput').focus();
+    }, 350);
+  }
+}
+
+function addMsg(html, type){
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = `chat-msg ${type}`;
+  const label = type === 'bot' ? 'SIGNAL BOT' : 'YOU';
+  div.innerHTML = `<div class="msg-label">${label}</div>${html}`;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addTyping(){
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'chat-msg bot';
+  div.id = 'chatTyping';
+  div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function removeTyping(){
+  const el = document.getElementById('chatTyping');
+  if(el) el.remove();
+}
+
+function askChat(q){
+  addMsg(q, 'user');
+  addTyping();
+  setTimeout(()=>{
+    removeTyping();
+    addMsg(handleChat(q), 'bot');
+  }, 400 + Math.random() * 400);
+}
+
+function sendChat(){
+  const input = document.getElementById('chatInput');
+  const q = input.value.trim();
+  if(!q) return;
+  input.value = '';
+  askChat(q);
+}
+
+function sigTag(sig){
+  const cls = sig === 'LONG' ? 'long' : sig === 'SHORT' ? 'short' : 'wait';
+  return `<span class="signal-tag ${cls}">${sig}</span>`;
+}
+
+function infoTag(text){
+  return `<span class="signal-tag info">${text}</span>`;
+}
+
+// ── Composite score helper ──
+function getComposite(){
+  const weights = {'5m':1,'15m':1.5,'1h':2,'4h':2.5,'1d':2};
+  let wSum=0, wTotal=0;
+  Object.keys(weights).forEach(tf=>{
+    wSum += (S.tfScore[tf]||50) * weights[tf];
+    wTotal += weights[tf];
+  });
+  return Math.round(wSum / wTotal);
+}
+
+function getCompositeSig(c){
+  return c>=65?'LONG':c<=35?'SHORT':'WAIT';
+}
+
+// ── Response generators ──
+function chatGreeting(){
+  const c = getComposite();
+  const sig = getCompositeSig(c);
+  const price = S.price > 0 ? '$'+S.price.toLocaleString('en',{maximumFractionDigits:0}) : '取得中...';
+  return `BTC先物シグナルアシスタントへようこそ！<br><br>`
+    + `現在のBTC価格: <strong>${price}</strong><br>`
+    + `総合シグナル: ${sigTag(sig)} スコア ${infoTag(c+'/100')}<br><br>`
+    + `下のボタンをタップするか、自由に質問してください。`;
+}
+
+function chatSummary(){
+  const c = getComposite();
+  const sig = getCompositeSig(c);
+  const price = '$'+S.price.toLocaleString('en',{maximumFractionDigits:0});
+  const jpy = '¥'+Math.round(S.price*S.usdJpy).toLocaleString('ja');
+  let html = `<strong>現在のシグナル概要</strong><br><br>`;
+  html += `BTC: <strong>${price}</strong> (${jpy})<br>`;
+  html += `総合判定: ${sigTag(sig)} スコア ${infoTag(c+'/100')}<br><br>`;
+  html += `<strong>時間軸別:</strong><br>`;
+  Object.keys(TFCFG).forEach(tf=>{
+    const s = S.tfSig[tf]||'WAIT', sc = S.tfScore[tf]||50;
+    html += `${TFCFG[tf].label}: ${sigTag(s)} ${sc}/100<br>`;
+  });
+  const lc = Object.keys(TFCFG).filter(tf=>S.tfSig[tf]==='LONG').length;
+  const sc = Object.keys(TFCFG).filter(tf=>S.tfSig[tf]==='SHORT').length;
+  if(lc>=4) html += `<br>✅ <span style="color:var(--green);">${lc}/5がLONG — 高信頼度の買いチャンス</span>`;
+  else if(sc>=4) html += `<br>🔴 <span style="color:var(--red);">${sc}/5がSHORT — 高信頼度の売りチャンス</span>`;
+  else html += `<br>⚠ シグナル混在 — 方向が揃うまで慎重に`;
+  return html;
+}
+
+function chatEntry(){
+  const c = getComposite();
+  const sig = getCompositeSig(c);
+  const s5 = S.tfSig['5m']||'WAIT', s15 = S.tfSig['15m']||'WAIT';
+  const s1h = S.tfSig['1h']||'WAIT', s4h = S.tfSig['4h']||'WAIT';
+  let html = `<strong>エントリー判断</strong><br><br>`;
+  html += `総合: ${sigTag(sig)} (${c}/100)<br>`;
+  html += `5分足: ${sigTag(s5)} / 15分足: ${sigTag(s15)}<br>`;
+  html += `1時間: ${sigTag(s1h)} / 4時間: ${sigTag(s4h)}<br><br>`;
+
+  if(c>=80){
+    html += `🟢 <strong style="color:var(--green);">絶好のロングチャンス！</strong><br>`;
+    html += `全時間軸が買い方向で揃っています。押し目買いを積極的に検討してください。<br>`;
+    html += `推奨: フルサイズでエントリー可。`;
+  } else if(c>=65){
+    html += `🔵 <strong style="color:var(--accent);">ロング寄り — 慎重にエントリー</strong><br>`;
+    html += `上位足がLONGを確認してから5分足の押し目でエントリー。<br>`;
+    html += `推奨: サイズは通常の70%程度に。`;
+  } else if(c<=20){
+    html += `🔴 <strong style="color:var(--red);">絶好のショートチャンス！</strong><br>`;
+    html += `全時間軸が売り方向で揃っています。戻り売りを積極的に検討。<br>`;
+    html += `推奨: フルサイズでエントリー可。`;
+  } else if(c<=35){
+    html += `🟠 <strong style="color:var(--orange);">ショート寄り — 慎重にエントリー</strong><br>`;
+    html += `上位足がSHORTを確認してから5分足の戻りでエントリー。<br>`;
+    html += `推奨: サイズは通常の70%程度に。`;
+  } else {
+    html += `⬛ <strong style="color:var(--yellow);">様子見推奨</strong><br>`;
+    html += `シグナルが拮抗中。方向が揃うまでエントリーを控えてください。<br>`;
+    html += `無理なエントリーは損失の元です。`;
+  }
+  return html;
+}
+
+function chatRisk(){
+  let html = `<strong>リスク要因チェック</strong><br><br>`;
+  const risks = [];
+
+  // RSI extreme
+  if(S.rsi5>75) risks.push(`⚠ RSI 5分 = ${S.rsi5.toFixed(0)} — <span style="color:var(--red);">買われすぎ！反転注意</span>`);
+  if(S.rsi5<25) risks.push(`⚠ RSI 5分 = ${S.rsi5.toFixed(0)} — <span style="color:var(--green);">売られすぎ！反転候補</span>`);
+  if(S.rsi15>75) risks.push(`⚠ RSI 15分 = ${S.rsi15.toFixed(0)} — <span style="color:var(--red);">買われすぎ！反転注意</span>`);
+  if(S.rsi15<25) risks.push(`⚠ RSI 15分 = ${S.rsi15.toFixed(0)} — <span style="color:var(--green);">売られすぎ！反転候補</span>`);
+
+  // FR extreme
+  const frPct = S.fr*100;
+  if(frPct>0.05) risks.push(`🔴 FR = +${frPct.toFixed(4)}% — <span style="color:var(--red);">ロング過多！逆張りショート候補</span>`);
+  if(frPct<-0.03) risks.push(`🟢 FR = ${frPct.toFixed(4)}% — <span style="color:var(--green);">ショート過多！踏み上げリスク</span>`);
+
+  // F&G extreme
+  if(S.fg>=80) risks.push(`⚠ F&G = ${S.fg} (極度の強欲) — <span style="color:var(--red);">危険水域</span>`);
+  if(S.fg<=20) risks.push(`ℹ F&G = ${S.fg} (極度の恐怖) — <span style="color:var(--green);">買い場候補</span>`);
+
+  // Event proximity
+  const now = new Date();
+  const events = [
+    {name:'米雇用統計(NFP)', t:new Date('2026-03-07T13:30:00Z')},
+    {name:'CPI', t:new Date('2026-03-12T13:30:00Z')},
+    {name:'FOMC', t:new Date('2026-03-19T18:00:00Z')},
+  ];
+  events.forEach(ev=>{
+    const diff = ev.t - now;
+    if(diff>0 && diff<48*3600000){
+      const h = Math.floor(diff/3600000);
+      risks.push(`🔴 <strong>${ev.name}</strong>まで残り${h}時間！ — ポジション縮小推奨`);
+    } else if(diff>0 && diff<7*86400000){
+      const d = Math.floor(diff/86400000);
+      risks.push(`⚠ ${ev.name}まで残り${d}日 — 注意`);
+    }
+  });
+
+  if(risks.length===0){
+    html += `✅ <span style="color:var(--green);">現在、重大なリスク要因はありません。</span><br>通常どおりシグナルに従ってトレードできます。`;
+  } else {
+    html += risks.join('<br>');
+  }
+  return html;
+}
+
+function chatInds(){
+  const frPct = S.fr*100;
+  const oiChg = S.oiPrev>0?(S.oiVal-S.oiPrev)/S.oiPrev*100:0;
+  let html = `<strong>主要指標サマリー</strong><br><br>`;
+  html += `RSI 5分: <strong>${S.rsi5.toFixed(0)}</strong> ${S.rsi5>70?'⚠買われすぎ':S.rsi5<30?'⚠売られすぎ':'中立'}<br>`;
+  html += `RSI 15分: <strong>${S.rsi15.toFixed(0)}</strong> ${S.rsi15>70?'⚠買われすぎ':S.rsi15<30?'⚠売られすぎ':'中立'}<br>`;
+  html += `FR: <strong>${(frPct>=0?'+':'')+frPct.toFixed(4)}%</strong> ${frPct>0.03?'ロング過多':frPct<-0.01?'ショート過多':'中立'}<br>`;
+  html += `L/S: <strong>${S.ls.toFixed(0)}/${(100-S.ls).toFixed(0)}</strong> ${S.ls>60?'ロング過多':S.ls<40?'ショート過多':'均衡'}<br>`;
+  html += `OI変化: <strong>${(oiChg>=0?'+':'')+oiChg.toFixed(1)}%</strong><br>`;
+  html += `F&G: <strong>${S.fg}</strong> ${S.fg>=75?'極度の強欲':S.fg<=25?'極度の恐怖':S.fg>=50?'強欲':'恐怖'}<br>`;
+  html += `USD/JPY: <strong>${S.usdJpy.toFixed(2)}</strong><br>`;
+  html += `清算ゾーン↑: <strong>$${Math.round(S.price*1.025).toLocaleString()}</strong>`;
+  return html;
+}
+
+function chatFunda(){
+  let html = `<strong>ファンダメンタルズ・直近イベント</strong><br><br>`;
+  const now = new Date();
+  const events = [
+    {name:'米雇用統計(NFP)', date:'3/7(金) 22:30', t:new Date('2026-03-07T13:30:00Z'), imp:'最重要'},
+    {name:'CPI', date:'3/12(水) 22:30', t:new Date('2026-03-12T13:30:00Z'), imp:'高'},
+    {name:'FOMC', date:'3/19(水) 03:00', t:new Date('2026-03-19T18:00:00Z'), imp:'高'},
+    {name:'四半期末リバランス', date:'3/31(月)', t:new Date('2026-03-31T00:00:00Z'), imp:'中'},
+  ];
+  events.forEach(ev=>{
+    const diff = ev.t - now;
+    if(diff>0){
+      const d = Math.floor(diff/86400000);
+      const h = Math.floor((diff%86400000)/3600000);
+      const cd = d>0 ? `${d}日${h}h` : `${h}h`;
+      const color = d<2?'var(--red)':d<5?'var(--yellow)':'var(--accent)';
+      html += `<span style="color:${color};">●</span> <strong>${ev.name}</strong> ${ev.date}<br>`;
+      html += `　残り <strong style="color:${color};">${cd}</strong> [${ev.imp}]<br>`;
+    }
+  });
+  html += `<br>F&G: ${S.fg} — ${S.fg<=25?'極度の恐怖 → 買い場候補':S.fg>=75?'極度の強欲 → 売り場候補':'中立的'}`;
+  html += `<br><br>💡 スキャルはテクニカル95%、ファンダ5%が最適。ファンダは「指標発表時に乗らない」判断に活用。`;
+  return html;
+}
+
+function chatStrategy(){
+  const c = getComposite();
+  const frPct = S.fr * 100;
+  let html = `<strong>現在の状況に合った戦略</strong><br><br>`;
+
+  if(frPct > 0.05){
+    html += `${infoTag('FR Contrarian')} がおすすめ<br>`;
+    html += `FR = +${frPct.toFixed(4)}% が高水準。逆張りショート候補。<br>`;
+    html += `勝率: 68-74% / タイムフレーム: 1H-4H`;
+  } else if(frPct < -0.03){
+    html += `${infoTag('FR Contrarian')} がおすすめ<br>`;
+    html += `FR = ${frPct.toFixed(4)}% が低水準。逆張りロング候補。<br>`;
+    html += `勝率: 68-74% / タイムフレーム: 1H-4H`;
+  } else if(S.fg <= 20){
+    html += `${infoTag('Fear&Greed 逆張り')} がおすすめ<br>`;
+    html += `F&G = ${S.fg}（極度の恐怖）。絶好の買い場候補。<br>`;
+    html += `勝率: 62-70% / タイムフレーム: 日足-週足`;
+  } else if(S.fg >= 80){
+    html += `${infoTag('Fear&Greed 逆張り')} がおすすめ<br>`;
+    html += `F&G = ${S.fg}（極度の強欲）。逆張りショート候補。<br>`;
+    html += `勝率: 62-70% / タイムフレーム: 日足-週足`;
+  } else if(c >= 75){
+    html += `${infoTag('Liquidation Hunt')} がおすすめ<br>`;
+    html += `強いLONGシグナル。上方の清算ゾーン($${Math.round(S.price*1.025).toLocaleString()})に向かうトレンドフォロー。<br>`;
+    html += `勝率: 63-70% / タイムフレーム: 1H-4H`;
+  } else if(c <= 25){
+    html += `${infoTag('Liquidation Hunt')} がおすすめ<br>`;
+    html += `強いSHORTシグナル。下方の清算ゾーンに向かうトレンドフォロー。<br>`;
+    html += `勝率: 63-70% / タイムフレーム: 1H-4H`;
+  } else {
+    html += `${infoTag('Cash & Carry')} がおすすめ<br>`;
+    html += `方向感が弱いため、中立戦略が安全。現物ロング+先物ショートでFR収益を積み上げ。<br>`;
+    html += `勝率: 85%+ / 年率10-30%の安定リターン`;
+  }
+  html += `<br><br>💡 詳細は上部の「高勝率戦略ライブラリ」をタップ。`;
+  return html;
+}
+
+function handleChat(q){
+  const t = q.toLowerCase();
+  // Route to appropriate response
+  if(t.includes('シグナル') || t.includes('signal') || t.includes('今') || t.includes('状況')) return chatSummary();
+  if(t.includes('エントリー') || t.includes('entry') || t.includes('入る') || t.includes('すべき')) return chatEntry();
+  if(t.includes('リスク') || t.includes('risk') || t.includes('危険') || t.includes('注意')) return chatRisk();
+  if(t.includes('指標') || t.includes('インジ') || t.includes('まとめ') || t.includes('rsi') || t.includes('fr') || t.includes('oi')) return chatInds();
+  if(t.includes('ファンダ') || t.includes('イベント') || t.includes('fomc') || t.includes('nfp') || t.includes('cpi') || t.includes('経済')) return chatFunda();
+  if(t.includes('戦略') || t.includes('strategy') || t.includes('おすすめ') || t.includes('手法')) return chatStrategy();
+  if(t.includes('価格') || t.includes('price') || t.includes('いくら')){
+    const price = '$'+S.price.toLocaleString('en',{maximumFractionDigits:0});
+    const jpy = '¥'+Math.round(S.price*S.usdJpy).toLocaleString('ja');
+    return `現在のBTC価格: <strong>${price}</strong><br>(${jpy})<br>USD/JPY: ${S.usdJpy.toFixed(2)}`;
+  }
+  if(t.includes('清算') || t.includes('liq')){
+    const liq = Math.round(S.price*1.025);
+    const dist = ((liq-S.price)/S.price*100).toFixed(1);
+    return `SHORT清算ゾーン(推定): <strong>$${liq.toLocaleString()}</strong><br>現在値から +${dist}%<br>清算帯に価格が近づくと「磁石効果」で引き寄せられやすい。`;
+  }
+  if(t.includes('恐怖') || t.includes('greed') || t.includes('fear') || t.includes('f&g')){
+    return `Fear & Greed Index: <strong>${S.fg}</strong><br>${S.fg<=25?'極度の恐怖 → 逆張りロング候補':S.fg>=75?'極度の強欲 → 逆張りショート候補':'中立的。スキャルは参考程度に。'}`;
+  }
+  if(t.includes('ヘルプ') || t.includes('help') || t.includes('使い方')){
+    return `以下の質問ができます:<br><br>`
+      + `● 「今のシグナルは？」— 全体概要<br>`
+      + `● 「エントリーすべき？」— 判断<br>`
+      + `● 「リスクは？」— リスク要因<br>`
+      + `● 「指標まとめ」— RSI, FR等<br>`
+      + `● 「ファンダは？」— イベント情報<br>`
+      + `● 「おすすめ戦略」— 戦略提案<br>`
+      + `● 「価格」「清算」「F&G」等も可`;
+  }
+  // Default fallback
+  return `その質問への回答を準備中です。以下のキーワードで質問してみてください:<br><br>`
+    + `${infoTag('シグナル')} ${infoTag('エントリー')} ${infoTag('リスク')}<br>`
+    + `${infoTag('指標')} ${infoTag('ファンダ')} ${infoTag('戦略')}<br>`
+    + `${infoTag('価格')} ${infoTag('清算')} ${infoTag('F&G')}`;
+}
 </script>
 
 
