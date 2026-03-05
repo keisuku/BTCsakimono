@@ -509,7 +509,11 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
     <button class="notif-toggle" id="nt3" onclick="toggleNotifType(3)">OFF</button>
     <div class="notif-info"><span class="notif-name">連続通知（30秒）</span><span class="notif-desc">エントリー好機中は30秒ごとに通知</span></div>
   </div>
-  <div class="notif-night">🌙 ナイトモード（22:00〜07:00）は自動で通知停止</div>
+  <div class="notif-row">
+    <button class="notif-toggle" id="nt4" onclick="toggleNotifType(4)">OFF</button>
+    <div class="notif-info"><span class="notif-name">夜間通知オン</span><span class="notif-desc">ONにすると21:00〜06:00でも通知を受信</span></div>
+  </div>
+  <div class="notif-night">🌙 ナイトモード（21:00〜06:00）は自動で通知停止</div>
 </div>
 
 <!-- UPDATE SPEED CONTROL -->
@@ -2366,20 +2370,22 @@ function closeMD(){document.getElementById('mOv').classList.remove('show');}
 let swReg = null;
 
 // 3 independent notification types, persisted in localStorage
-const NOTIF_KEYS = ['notif1','notif2','notif3'];
-const NOTIF_LABELS = ['鉄板（1時間）','エントリー（10分）','連続通知（30秒）'];
+const NOTIF_KEYS = ['notif1','notif2','notif3','notif4'];
+const NOTIF_LABELS = ['鉄板（1時間）','エントリー（10分）','連続通知（30秒）','夜間通知オン'];
 let notifState = {
   notif1: localStorage.getItem('notif1') === 'true',
   notif2: localStorage.getItem('notif2') === 'true',
   notif3: localStorage.getItem('notif3') === 'true',
+  notif4: localStorage.getItem('notif4') === 'true',
 };
 
 // Throttle timestamps (ms) — last notification sent time per type per coin
-let lastNotifTime = { notif1:{}, notif2:{}, notif3:{} };
+let lastNotifTime = { notif1:{}, notif2:{}, notif3:{}, notif4:{} };
 const THROTTLE_MS = {
   notif1: 60 * 60 * 1000,  // 1 hour
   notif2: 10 * 60 * 1000,  // 10 minutes
   notif3: 30 * 1000,        // 30 seconds
+  notif4: 0,                // night override toggle (no throttle)
 };
 
 // Register SW
@@ -2391,15 +2397,15 @@ if ('serviceWorker' in navigator) {
   }).catch(err => console.warn('[PWA] SW registration failed:', err));
 }
 
-// ── Night Mode Detection (22:00–07:00 JST) ──
+// ── Night Mode Detection (21:00–06:00 JST) ──
 function isNightMode() {
   const h = new Date().getHours(); // uses device local time (JST on user's iPhone)
-  return h >= 22 || h < 7;
+  return h >= 21 || h < 6;
 }
 
 // ── UI updates ──
 function updateNotifUI() {
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 4; i++) {
     const btn = document.getElementById('nt' + i);
     if (!btn) continue;
     const on = notifState['notif' + i];
@@ -2409,13 +2415,19 @@ function updateNotifUI() {
   // Bell icon color in topbar
   const bell = document.getElementById('notifPanelToggle');
   if (bell) {
-    const anyOn = notifState.notif1 || notifState.notif2 || notifState.notif3;
+    const anyOn = notifState.notif1 || notifState.notif2 || notifState.notif3 || notifState.notif4;
     bell.style.color = anyOn ? 'var(--accent)' : 'var(--dim)';
     bell.style.borderColor = anyOn ? 'var(--accent)' : 'var(--border)';
   }
   // Night mode indicator
   const ni = document.getElementById('nightIndicator');
-  if (ni) ni.textContent = isNightMode() ? '🌙 ナイト中（通知停止）' : '';
+  if (ni) {
+    if (isNightMode()) {
+      ni.textContent = notifState.notif4 ? '🌙 ナイト中（通知有効）' : '🌙 ナイト中（通知停止）';
+    } else {
+      ni.textContent = '';
+    }
+  }
 }
 
 async function toggleNotifType(n) {
@@ -2470,8 +2482,8 @@ function sendNotif(type, title, body, tag) {
 
 // ── Core notification check (called on every renderAll) ──
 function checkNotifications() {
-  // Skip if night mode
-  if (isNightMode()) return;
+  // Skip if night mode (unless night override is on)
+  if (isNightMode() && !notifState.notif4) return;
   if (!notifState.notif1 && !notifState.notif2 && !notifState.notif3) return;
 
   const coin = currentCoin;
