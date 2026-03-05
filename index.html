@@ -482,6 +482,28 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .coin-btn{font-family:'Share Tech Mono',monospace;font-size:.68rem;padding:4px 11px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--border);cursor:pointer;transition:all .2s;letter-spacing:.06em;}
 .coin-btn.active{background:rgba(0,212,255,.15);color:var(--accent);border-color:rgba(0,212,255,.4);box-shadow:0 0 6px rgba(0,212,255,.15);}
 .coin-btn:hover:not(.active){background:rgba(255,255,255,.08);color:var(--text);}
+
+/* ── SIGNAL NATURE + DAY GAUGE ── */
+.nature-gauge-row{display:flex;gap:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;margin:10px 16px 4px;flex-wrap:wrap;align-items:flex-start;}
+.nature-panel{flex:2;min-width:200px;}
+.day-gauge-panel{flex:1;min-width:110px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.ng-title{font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;}
+.nature-badge{font-size:.77rem;font-weight:700;padding:5px 11px;border-radius:5px;display:inline-block;margin-bottom:8px;line-height:1.3;}
+.nature-badge.reversal{background:rgba(255,214,10,.13);color:var(--yellow);border:1px solid rgba(255,214,10,.35);}
+.nature-badge.momentum{background:rgba(0,212,255,.1);color:var(--accent);border:1px solid rgba(0,212,255,.28);}
+.nature-badge.mixed{background:rgba(0,255,136,.08);color:var(--green);border:1px solid rgba(0,255,136,.2);}
+.nature-badge.neut{background:rgba(90,122,138,.08);color:var(--dim);border:1px solid var(--border);}
+.nature-subs{display:flex;flex-direction:column;gap:6px;}
+.nature-sub{display:flex;align-items:center;gap:7px;font-size:.68rem;flex-wrap:wrap;}
+.nsub-check{font-family:'Share Tech Mono',monospace;font-size:.8rem;font-weight:bold;width:14px;flex-shrink:0;text-align:center;transition:color .3s;}
+.nsub-check.on{color:var(--green);}
+.nsub-check.off{color:var(--dim);}
+.nsub-label{font-weight:700;color:var(--text);min-width:90px;flex-shrink:0;}
+.nsub-desc{color:var(--dim);font-size:.61rem;}
+.day-gauge-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.day-gauge-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.day-gauge-pct{font-family:'Share Tech Mono',monospace;font-size:1.05rem;font-weight:bold;line-height:1;}
+.day-gauge-lbl{font-family:'Share Tech Mono',monospace;font-size:.46rem;color:var(--dim);margin-top:2px;white-space:nowrap;}
 </style>
 
 </head>
@@ -510,7 +532,6 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
     <span id="clk">--:--:--</span>
     <span class="green">JST</span>
     <span class="dim">更新: <span id="nxtUpd">--s</span></span>
-    <a href="#lineSection" class="line-nav-btn"><span class="line-nav-dot off" id="lineNavDot"></span>LINE通知</a>
   </div>
 </div>
 
@@ -614,6 +635,34 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   </div>
 </div>
 
+  </div>
+
+  <!-- シグナルの性質 + 今日のチャンス度合い -->
+  <div class="nature-gauge-row" id="natureGaugeRow">
+    <div class="nature-panel">
+      <div class="ng-title">シグナルの性質</div>
+      <div id="natureBadge" class="nature-badge neut">— データ読み込み中</div>
+      <div id="natureSubWrap" class="nature-subs" style="display:none;">
+        <div class="nature-sub" id="nSub0"></div>
+        <div class="nature-sub" id="nSub1"></div>
+        <div class="nature-sub" id="nSub2"></div>
+      </div>
+    </div>
+    <div class="day-gauge-panel">
+      <div class="ng-title">今日の強気チャンス</div>
+      <div class="day-gauge-wrap">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="30" fill="none" stroke="#1e2d3d" stroke-width="9"/>
+          <circle cx="40" cy="40" r="30" fill="none" stroke="var(--yellow)" stroke-width="9"
+            stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="94.3"
+            id="dayGaugeArc" transform="rotate(-90 40 40)"/>
+        </svg>
+        <div class="day-gauge-center">
+          <div class="day-gauge-pct" id="dayGaugePct">--%</div>
+          <div class="day-gauge-lbl" id="dayGaugeLbl">強気</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 5m + 15m pair -->
@@ -1499,6 +1548,83 @@ function renderScalpHero(){
       const cls=['active-short','active-short-w','active-wait','active-long-w','active-long'][i];
       el.className='lp '+cls;
     }
+  }
+
+  renderSignalNature(composite, sig);
+}
+
+function renderSignalNature(composite, sig){
+  // ── 今日の強気チャンス（日足スコア） ──
+  const dayScore = S.tfScore['1d'] !== undefined ? S.tfScore['1d'] : composite;
+  const dayArc = document.getElementById('dayGaugeArc');
+  const dayPctEl = document.getElementById('dayGaugePct');
+  const dayLblEl = document.getElementById('dayGaugeLbl');
+  const dayColor = dayScore>=65?'var(--green)':dayScore<=35?'var(--red)':'var(--yellow)';
+  if(dayArc){ dayArc.setAttribute('stroke-dashoffset',(188.5*(1-dayScore/100)).toFixed(1)); dayArc.setAttribute('stroke',dayColor); }
+  if(dayPctEl){ dayPctEl.textContent=dayScore+'%'; dayPctEl.style.color=dayColor; }
+  if(dayLblEl){ dayLblEl.textContent=dayScore>=65?'LONGバイアス日':dayScore<=35?'SHORTバイアス日':'中立日'; }
+
+  // ── シグナルの性質 ──
+  const badge = document.getElementById('natureBadge');
+  const subWrap = document.getElementById('natureSubWrap');
+  if(sig==='WAIT'){
+    if(badge){ badge.textContent='⬛ 判断なし — 方向感なし'; badge.className='nature-badge neut'; }
+    if(subWrap) subWrap.style.display='none';
+    return;
+  }
+  const isLong = sig==='LONG';
+
+  // Sub①: RSI 売られ過ぎ／買われ過ぎ（1H・4H）
+  const rsi1h = S.tfInds['1h']?.rsi;
+  const rsi4h = S.tfInds['4h']?.rsi;
+  const rsiRev = isLong
+    ? ((rsi1h?.badge||'').includes('売られ') || (rsi4h?.badge||'').includes('売られ'))
+    : ((rsi1h?.badge||'').includes('買われ') || (rsi4h?.badge||'').includes('買われ'));
+
+  // Sub②: FR 逆張り（FRが反対方向に極端）
+  const frRev = isLong ? S.fr < -0.015 : S.fr > 0.03;
+  const frPct = (S.fr*100).toFixed(3);
+
+  // Sub③: ボリンジャーバンド 反発（下限付近 for LONG、上限付近 for SHORT）
+  const bb1h = S.tfInds['1h']?.bb;
+  const bb4h = S.tfInds['4h']?.bb;
+  const bbRev = isLong
+    ? (bb1h?.cls==='bull' || bb4h?.cls==='bull')
+    : (bb1h?.cls==='bear' || bb4h?.cls==='bear');
+
+  const revCount = [rsiRev, frRev, bbRev].filter(Boolean).length;
+
+  const subs = [
+    { label:'RSI 売られ過ぎ', active:rsiRev, desc:isLong?'1H/4H RSI が30以下（売られ過ぎ）':'1H/4H RSI が70以上（買われ過ぎ）' },
+    { label:'FR 逆張り',      active:frRev,  desc:isLong?`FR ${frPct}% — ロング側有利（スクイーズ狙い）`:`FR ${frPct}% — ショート側有利` },
+    { label:'ボリバン 反発',  active:bbRev,  desc:isLong?'BB 下限付近 — 平均回帰ロング狙い':'BB 上限付近 — 平均回帰ショート狙い' },
+  ];
+
+  if(revCount>=1){
+    if(badge){
+      badge.textContent = isLong?'🔄 売られ過ぎ反発 — 逆張りロング':'🔄 買われ過ぎ反落 — 逆張りショート';
+      badge.className='nature-badge reversal';
+    }
+    if(subWrap){
+      subWrap.style.display='flex';
+      ['nSub0','nSub1','nSub2'].forEach((id,i)=>{
+        const el=document.getElementById(id);
+        if(el) el.innerHTML=`<span class="nsub-check ${subs[i].active?'on':'off'}">${subs[i].active?'✓':'—'}</span><span class="nsub-label">${subs[i].label}</span><span class="nsub-desc">${subs[i].desc}</span>`;
+      });
+    }
+  } else {
+    // 順張り（モメンタム）チェック
+    const trend4h = S.tfInds['4h']?.trend;
+    const vwap1h  = S.tfInds['1h']?.vwap;
+    const momentumOk = isLong
+      ? (trend4h?.cls==='bull') && (vwap1h?.cls==='bull')
+      : (trend4h?.cls==='bear') && (vwap1h?.cls==='bear');
+    if(momentumOk){
+      if(badge){ badge.textContent=isLong?'📈 勢い順張り — トレンドフォローロング':'📉 勢い順張り — トレンドフォローショート'; badge.className='nature-badge momentum'; }
+    } else {
+      if(badge){ badge.textContent=isLong?'📊 LONGシグナル — 複合要因':'📊 SHORTシグナル — 複合要因'; badge.className='nature-badge mixed'; }
+    }
+    if(subWrap) subWrap.style.display='none';
   }
 }
 
