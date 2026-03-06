@@ -434,6 +434,87 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .coin-btn{font-family:'Share Tech Mono',monospace;font-size:.68rem;padding:4px 11px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--border);cursor:pointer;transition:all .2s;letter-spacing:.06em;}
 .coin-btn.active{background:rgba(0,212,255,.15);color:var(--accent);border-color:rgba(0,212,255,.4);box-shadow:0 0 6px rgba(0,212,255,.15);}
 .coin-btn:hover:not(.active){background:rgba(255,255,255,.08);color:var(--text);}
+.coin-sep{color:var(--border);font-size:.7rem;margin:0 2px;}
+.bot-arena-btn.active{background:rgba(167,139,250,.18)!important;color:#c4b5fd!important;border-color:rgba(167,139,250,.45)!important;box-shadow:0 0 8px rgba(167,139,250,.15)!important;}
+
+/* ══ BOT ARENA ══ */
+#botArenaSection{display:none;}
+#botArenaSection.visible{display:block;}
+#mainDashboard.hidden{display:none;}
+.ba-wrap{padding:8px 12px;max-width:1200px;margin:0 auto;}
+.ba-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.ba-title{font-size:1rem;font-weight:900;color:#c4b5fd;font-family:'Share Tech Mono',monospace;letter-spacing:.08em;}
+.ba-sub{font-size:.62rem;color:var(--dim);}
+.ba-live{font-size:.5rem;padding:2px 7px;background:rgba(167,139,250,.12);color:#c4b5fd;border:1px solid rgba(167,139,250,.25);border-radius:3px;letter-spacing:.1em;animation:baPulse 2s infinite;}
+@keyframes baPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* leaderboard */
+.ba-leaders{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+@media(max-width:700px){.ba-leaders{grid-template-columns:1fr;}}
+.ba-lead-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;position:relative;overflow:hidden;}
+.ba-lead-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#a78bfa,#7c3aed);}
+.ba-lc-cat{font-family:'Share Tech Mono',monospace;font-size:.54rem;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
+.ba-lc-name{font-size:1.05rem;font-weight:900;margin-bottom:4px;}
+.ba-lc-crown{color:#ffd700;margin-right:4px;}
+.ba-lc-stats{display:flex;gap:14px;font-size:.7rem;margin-bottom:4px;}
+.ba-lc-stat{display:flex;flex-direction:column;gap:1px;}
+.ba-lc-stat-lbl{font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+.ba-lc-stat-val{font-family:'Share Tech Mono',monospace;font-weight:700;}
+.ba-lc-stat-val.pos{color:var(--green);}
+.ba-lc-stat-val.neg{color:var(--red);}
+.ba-lc-stat-val.neut{color:var(--yellow);}
+.ba-lc-style{font-size:.56rem;color:var(--dim);font-style:italic;margin-top:4px;}
+
+/* bot cards */
+.ba-bots{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.ba-bot{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;position:relative;overflow:hidden;transition:border-color .3s;}
+.ba-bot::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;transition:background .3s;}
+.ba-bot.st-holding.dir-long{border-color:rgba(0,255,136,.3);}.ba-bot.st-holding.dir-long::before{background:var(--green);}
+.ba-bot.st-holding.dir-short{border-color:rgba(255,45,85,.3);}.ba-bot.st-holding.dir-short::before{background:var(--red);}
+.ba-bot.st-ready{border-color:rgba(255,214,10,.3);}.ba-bot.st-ready::before{background:var(--yellow);}
+.ba-bot.st-watching::before{background:var(--dim);}
+.ba-bot-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+.ba-bot-emoji{font-size:1.1rem;}
+.ba-bot-name{font-weight:900;font-size:.9rem;}
+.ba-bot-cat{font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);background:var(--bg3);padding:2px 6px;border-radius:3px;}
+.ba-bot-status{font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:2px 8px;border-radius:3px;margin-left:auto;}
+.ba-bot-status.watching{background:rgba(90,122,138,.15);color:var(--dim);border:1px solid rgba(90,122,138,.3);}
+.ba-bot-status.ready{background:rgba(255,214,10,.12);color:var(--yellow);border:1px solid rgba(255,214,10,.3);}
+.ba-bot-status.holding{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.25);}
+.ba-bot-status.holding-short{background:rgba(255,45,85,.1);color:var(--red);border:1px solid rgba(255,45,85,.25);}
+.ba-bot-detail{font-size:.72rem;color:var(--text);line-height:1.5;margin-bottom:6px;}
+.ba-bot-rationale{font-size:.64rem;color:var(--dim);line-height:1.4;padding:6px 8px;background:var(--bg3);border-radius:4px;border-left:2px solid rgba(167,139,250,.3);margin-bottom:6px;}
+.ba-bot-quote{font-size:.68rem;color:#c4b5fd;font-style:italic;margin-top:4px;}
+.ba-bot-mini-stats{display:flex;gap:12px;font-size:.6rem;color:var(--dim);font-family:'Share Tech Mono',monospace;}
+.ba-bot-mini-stats span{display:flex;gap:3px;}
+
+/* trade log */
+.ba-log-title{font-size:.56rem;text-transform:uppercase;letter-spacing:.2em;color:var(--dim);font-family:'Share Tech Mono',monospace;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.ba-log-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.ba-log{max-height:200px;overflow-y:auto;}
+.ba-log-item{display:flex;align-items:center;gap:8px;font-size:.65rem;padding:3px 0;border-bottom:1px solid rgba(42,63,85,.3);}
+.ba-log-time{font-family:'Share Tech Mono',monospace;color:var(--dim);min-width:50px;}
+.ba-log-name{font-weight:700;min-width:42px;}
+.ba-log-dir{font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:1px 5px;border-radius:2px;}
+.ba-log-dir.LONG{background:rgba(0,255,136,.12);color:var(--green);}
+.ba-log-dir.SHORT{background:rgba(255,45,85,.1);color:var(--red);}
+.ba-log-pnl{font-family:'Share Tech Mono',monospace;font-weight:700;}
+.ba-log-result{font-size:.54rem;padding:1px 5px;border-radius:2px;font-family:'Share Tech Mono',monospace;}
+.ba-log-result.win{background:rgba(0,255,136,.12);color:var(--green);}
+.ba-log-result.lose{background:rgba(255,45,85,.1);color:var(--red);}
+
+/* performance bars */
+.ba-perf{margin-top:12px;}
+.ba-perf-row{display:flex;align-items:center;gap:8px;font-size:.62rem;margin-bottom:4px;}
+.ba-perf-name{min-width:50px;font-weight:700;}
+.ba-perf-bar-wrap{flex:1;height:12px;background:var(--bg3);border-radius:6px;overflow:hidden;}
+.ba-perf-bar{height:100%;border-radius:6px;transition:width .5s;background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+.ba-perf-val{font-family:'Share Tech Mono',monospace;min-width:80px;text-align:right;}
+
+/* pdca section */
+.ba-pdca{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:12px;}
+.ba-pdca-title{font-size:.56rem;text-transform:uppercase;letter-spacing:.2em;color:#c4b5fd;font-family:'Share Tech Mono',monospace;margin-bottom:6px;}
+.ba-pdca-log{font-size:.64rem;color:var(--dim);line-height:1.5;}
 
 /* ── SIGNAL NATURE + DAY GAUGE ── */
 .nature-gauge-row{display:flex;gap:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;margin:10px 16px 4px;flex-wrap:wrap;align-items:flex-start;}
@@ -478,6 +559,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
     <button class="coin-btn" data-coin="ETH" onclick="switchCoin('ETH')">ETH</button>
     <button class="coin-btn" data-coin="XRP" onclick="switchCoin('XRP')">XRP</button>
     <button class="coin-btn" data-coin="SOL" onclick="switchCoin('SOL')">SOL</button>
+    <span class="coin-sep">|</span>
+    <button class="coin-btn bot-arena-btn" id="botArenaTab" onclick="toggleBotArena()">🤖 Bot Arena</button>
   </div>
   <div class="topbar-r">
     <span class="session-badge" id="sessionBadge">--</span>
@@ -514,6 +597,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 
 
+<div id="mainDashboard">
 <!-- CHART (TradingView) -->
 <div class="sec" style="padding-bottom:4px;">
   <div class="sec-t">リアルタイムチャート (TradingView) <span id="chartTfLabel" class="live-b">5分足</span></div>
@@ -1058,6 +1142,30 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   </div>
 </div>
 </div>
+</div><!-- /mainDashboard -->
+
+<!-- BOT ARENA SECTION -->
+<div id="botArenaSection">
+<div class="ba-wrap">
+  <div class="ba-header">
+    <span class="ba-title">🤖 BOT ARENA</span>
+    <span class="ba-live">LIVE</span>
+    <span class="ba-sub">AI Trading Bot — BTC ペーパートレードバトル</span>
+  </div>
+  <div class="ba-leaders" id="baLeaders"></div>
+  <div class="ba-log-title">🔴 ライブトレード状況</div>
+  <div class="ba-bots" id="baBots"></div>
+  <div class="ba-log-title">📋 本日のトレード履歴</div>
+  <div class="ba-log" id="baLog"><div style="color:var(--dim);font-size:.64rem;">トレード履歴がまだありません...</div></div>
+  <div class="ba-log-title">📈 7日間パフォーマンス</div>
+  <div class="ba-perf" id="baPerf"></div>
+  <div class="ba-pdca" id="baPdca">
+    <div class="ba-pdca-title">🔄 PDCA改善ログ</div>
+    <div class="ba-pdca-log" id="baPdcaLog">初回PDCA改善は本日23:59 JSTに自動実行されます...</div>
+  </div>
+</div>
+</div>
+
 <!-- BOTTOM -->
 
 <div class="bottom">
@@ -2818,6 +2926,8 @@ async function fastFetch(){
     renderAll();
     renderEntryTiming();
     renderPriceRange();
+    // Bot Arena evaluation on every fast tick (only when BTC selected for accurate data)
+    if(currentCoin === 'BTC' && typeof botEvalAndSave === 'function') botEvalAndSave();
   }catch(e){}
 }
 
@@ -3494,6 +3604,640 @@ function openM(k){
 }
 function closeMOv(e){if(e.target===document.getElementById('mOv'))closeMD();}
 function closeMD(){document.getElementById('mOv').classList.remove('show');}
+
+// ═══════════════════════════════════════════════
+// BOT ARENA — AI Trading Bot System
+// ═══════════════════════════════════════════════
+
+const BOT_DEFS = [
+  { id:'john', name:'JOHN',   emoji:'🔵', tf:'5m',  style:'trend',   cat:'5分スキャル(順張り)',
+    desc:'5分足順張りスキャルパー', philosophy:'トレンドに乗る。流れに逆らわない。小さく確実に取る。',
+    quotes:{ watching:'チャートを注視中...流れを待つ。', ready:'トレンドが見えてきた。準備はいい。',
+             holding:'流れに乗っている。握り続けろ。', tp:'計画通りの利確。これが俺のスタイルだ。', sl:'損切りは勇気。次に切り替える。' }},
+  { id:'mike', name:'MIKE',   emoji:'🟣', tf:'5m',  style:'counter', cat:'5分スキャル(逆張り)',
+    desc:'5分足逆張りスキャルパー', philosophy:'行き過ぎた価格は必ず戻る。反転の瞬間を狙い撃つ。',
+    quotes:{ watching:'極端な動きを待っている...', ready:'もう少し下がれ...絶好の反転ポイントが近い。',
+             holding:'反転開始。ここからが本番だ。', tp:'完璧な反転トレード。これぞ逆張りの醍醐味。', sl:'今回は反転しなかった。相場に敬意を。' }},
+  { id:'sarah', name:'SARAH', emoji:'🟢', tf:'15m', style:'trend',   cat:'15分トレード(順張り)',
+    desc:'15分足トレンドフォロワー', philosophy:'確実なトレンドだけを狙う。待つのも相場の一部。',
+    quotes:{ watching:'まだ方向が定まっていない。待つのも相場。', ready:'SMAの流れが揃ってきた。もう少し...',
+             holding:'トレンドは友達。信じて付いていく。', tp:'トレンドフォローの勝利。美しい利確。', sl:'トレンドが崩れた。冷静に撤退。' }},
+  { id:'emma', name:'EMMA',   emoji:'🔴', tf:'15m', style:'counter', cat:'15分トレード(逆張り)',
+    desc:'15分足逆張りトレーダー', philosophy:'市場の歪みを見つける。FRとRSIの乖離が武器。',
+    quotes:{ watching:'FR・RSIの歪みを監視中...', ready:'市場が偏りすぎている。チャンスが近い。',
+             holding:'歪みの修正が始まった。', tp:'市場の歪みを利益に変えた。', sl:'歪みがさらに拡大した。一旦退く。' }},
+  { id:'alex', name:'ALEX',   emoji:'🟡', tf:'1h',  style:'trend',   cat:'1時間スイング(順張り)',
+    desc:'1時間足マルチTFトレーダー', philosophy:'複数時間軸の合致が最強のシグナル。大きな流れに乗る。',
+    quotes:{ watching:'複数時間軸の合流を待っている。', ready:'1Hと4Hの方向が揃った。勝負の時。',
+             holding:'大きな流れの中にいる。焦るな。', tp:'マルチTFの勝利。これが王道。', sl:'上位足と下位足が乖離した。撤退。' }},
+  { id:'yuki', name:'YUKI',   emoji:'⚪', tf:'1h',  style:'counter', cat:'1時間スイング(逆張り)',
+    desc:'1時間足マクロ逆張りトレーダー', philosophy:'恐怖の極致で買い、強欲の極みで売る。大衆の逆を行く。',
+    quotes:{ watching:'市場心理の極端化を待つ...', ready:'F&Gが極値に達した。大衆の逆を行く時だ。',
+             holding:'大衆と逆のポジション。信念を持て。', tp:'大衆心理の逆張り成功。これがマクロの力。', sl:'市場が更に極端化。一旦退却。' }},
+];
+
+// Bot parameters (tunable by PDCA)
+const BOT_DEFAULT_PARAMS = {
+  john:  { scoreEntry:65, scoreExit:45, rsiBull:55, rsiBear:45, tpPct:0.30, slPct:0.15, timeoutMin:15, cooldownMin:3 },
+  mike:  { rsiOB:72, rsiOS:28, bbEntry:true, tpPct:0.25, slPct:0.15, timeoutMin:12, cooldownMin:3 },
+  sarah: { scoreEntry:68, smaCross:true, vwapConfirm:true, tpPct:0.45, slPct:0.20, timeoutMin:30, cooldownMin:5 },
+  emma:  { rsiDiv:true, frThresh:0.03, rsiOB:70, rsiOS:30, tpPct:0.40, slPct:0.20, timeoutMin:30, cooldownMin:5 },
+  alex:  { scoreEntry:65, multiTfAlign:true, deltaConfirm:true, tpPct:0.60, slPct:0.30, timeoutMin:60, cooldownMin:10 },
+  yuki:  { fgExtreme:25, fgGreed:75, lsThresh:62, bbEntry:true, tpPct:0.70, slPct:0.35, timeoutMin:90, cooldownMin:15 },
+};
+
+// Bot Arena state
+let botArenaVisible = false;
+let botStates = {};  // id -> state object
+const BA_STORAGE_KEY = 'botArena_BTC_v2';
+
+function initBotArena(){
+  // Load from localStorage or create fresh
+  const saved = localStorage.getItem(BA_STORAGE_KEY);
+  if(saved){
+    try{ botStates = JSON.parse(saved); }catch(e){ botStates = {}; }
+  }
+  BOT_DEFS.forEach(def=>{
+    if(!botStates[def.id]){
+      botStates[def.id] = createBotState(def.id);
+    }
+    // Ensure params exist
+    if(!botStates[def.id].params){
+      botStates[def.id].params = JSON.parse(JSON.stringify(BOT_DEFAULT_PARAMS[def.id]));
+    }
+  });
+  schedulePDCA();
+}
+
+function createBotState(id){
+  return {
+    id,
+    position: null,       // { dir:'LONG'|'SHORT', entry:price, time:ts, tp:price, sl:price }
+    trades: [],           // completed trades (last 200)
+    dailyStats: [],       // [{date, wins, losses, pnlPct, tradeCount}]
+    totalWins: 0,
+    totalLosses: 0,
+    totalPnlPct: 0,
+    params: JSON.parse(JSON.stringify(BOT_DEFAULT_PARAMS[id])),
+    lastMsg: '',
+    status: 'watching',   // 'watching' | 'ready' | 'holding'
+    lastTradeTime: 0,     // timestamp of last trade close (for cooldown)
+    readyDetail: null,    // { dir, target, reason }
+    pdcaLog: [],          // last 10 PDCA adjustments
+  };
+}
+
+function saveBotArena(){
+  // Trim trades to last 200 per bot
+  Object.values(botStates).forEach(bs=>{
+    if(bs.trades.length>200) bs.trades = bs.trades.slice(-200);
+    if(bs.dailyStats.length>30) bs.dailyStats = bs.dailyStats.slice(-30);
+    if(bs.pdcaLog.length>20) bs.pdcaLog = bs.pdcaLog.slice(-20);
+  });
+  try{ localStorage.setItem(BA_STORAGE_KEY, JSON.stringify(botStates)); }catch(e){}
+}
+
+// ── Toggle Bot Arena view ──
+function toggleBotArena(){
+  botArenaVisible = !botArenaVisible;
+  document.getElementById('mainDashboard').classList.toggle('hidden', botArenaVisible);
+  document.getElementById('botArenaSection').classList.toggle('visible', botArenaVisible);
+  document.getElementById('botArenaTab').classList.toggle('active', botArenaVisible);
+  if(botArenaVisible) renderBotArena();
+}
+
+// Also update switchCoin to exit bot arena
+const _origSwitchCoin = switchCoin;
+switchCoin = async function(key){
+  if(botArenaVisible){
+    botArenaVisible = false;
+    document.getElementById('mainDashboard').classList.remove('hidden');
+    document.getElementById('botArenaSection').classList.remove('visible');
+    document.getElementById('botArenaTab').classList.remove('active');
+  }
+  return _origSwitchCoin(key);
+};
+
+// ═══════════════════════════════════════════════
+// BOT EVALUATION ENGINE
+// ═══════════════════════════════════════════════
+
+function botComputeTF(tf){
+  // Reuse the existing computeTF which reads from global S and KL
+  const kl = KL[tf](); if(!kl||kl.length<20) return null;
+  return computeTF(tf);
+}
+
+function evaluateBot(def, state){
+  const price = S.price;
+  if(!price || price<=0) return;
+  const now = Date.now();
+  const p = state.params;
+
+  // Cooldown check
+  if(state.lastTradeTime && (now - state.lastTradeTime) < (p.cooldownMin||3)*60000){
+    return; // Still in cooldown
+  }
+
+  // If holding position, check exit
+  if(state.position){
+    checkBotExit(def, state, price, now);
+    return;
+  }
+
+  // Not holding — check entry
+  checkBotEntry(def, state, price, now);
+}
+
+function checkBotEntry(def, state, price, now){
+  const p = state.params;
+  const tf = def.tf;
+  const r = botComputeTF(tf);
+  if(!r) return;
+
+  const score = r.score;
+  const inds = r.inds;
+  let signal = null; // 'LONG' | 'SHORT' | null
+  let reason = '';
+  let readyMsg = '';
+
+  switch(def.id){
+    case 'john': { // 5m trend follow
+      if(score >= p.scoreEntry && inds.trend && inds.trend.cls==='bull' && (!inds.rsi || inds.rsi.cls!=='bear')){
+        signal = 'LONG';
+        reason = `スコア${score} + SMAトレンド上昇` + (inds.delta?` + ${inds.delta.badge}`:'');
+      } else if(score <= (100-p.scoreEntry) && inds.trend && inds.trend.cls==='bear' && (!inds.rsi || inds.rsi.cls!=='bull')){
+        signal = 'SHORT';
+        reason = `スコア${score} + SMAトレンド下降` + (inds.delta?` + ${inds.delta.badge}`:'');
+      } else if(score >= (p.scoreEntry-8)){
+        state.status = 'ready';
+        state.readyDetail = { dir:'LONG', target:price, reason:`スコア${score}で上昇準備中` };
+      } else if(score <= (100-p.scoreEntry+8)){
+        state.status = 'ready';
+        state.readyDetail = { dir:'SHORT', target:price, reason:`スコア${score}で下落準備中` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+    case 'mike': { // 5m counter-trend
+      const rsi = r.rsi || 50;
+      const bb = inds.bb;
+      if(rsi <= p.rsiOS && bb && bb.cls==='bull'){
+        signal = 'LONG';
+        reason = `RSI${rsi.toFixed(0)}(売られすぎ) + BB下限タッチ`;
+      } else if(rsi >= p.rsiOB && bb && bb.cls==='bear'){
+        signal = 'SHORT';
+        reason = `RSI${rsi.toFixed(0)}(買われすぎ) + BB上限タッチ`;
+      } else if(rsi <= p.rsiOS+5){
+        state.status = 'ready';
+        state.readyDetail = { dir:'LONG', target:price, reason:`RSI${rsi.toFixed(0)}が売られすぎに接近` };
+      } else if(rsi >= p.rsiOB-5){
+        state.status = 'ready';
+        state.readyDetail = { dir:'SHORT', target:price, reason:`RSI${rsi.toFixed(0)}が買われすぎに接近` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+    case 'sarah': { // 15m trend
+      if(score >= p.scoreEntry && inds.trend && inds.trend.cls==='bull' && (!inds.vwap || inds.vwap.cls!=='bear')){
+        signal = 'LONG';
+        reason = `15分スコア${score} + トレンド上昇` + (inds.vwap?` + VWAP${inds.vwap.cls==='bull'?'上方':'近傍'}`:'');
+      } else if(score <= (100-p.scoreEntry) && inds.trend && inds.trend.cls==='bear' && (!inds.vwap || inds.vwap.cls!=='bull')){
+        signal = 'SHORT';
+        reason = `15分スコア${score} + トレンド下降` + (inds.vwap?` + VWAP${inds.vwap.cls==='bear'?'下方':'近傍'}`:'');
+      } else if(score >= (p.scoreEntry-5)){
+        state.status = 'ready';
+        state.readyDetail = { dir:'LONG', target:price, reason:`15分スコア${score}でLONG準備中` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+    case 'emma': { // 15m counter
+      const rsi = r.rsi || 50;
+      const frPct = S.fr * 100;
+      if(rsi <= p.rsiOS && Math.abs(frPct) >= p.frThresh){
+        signal = frPct > 0 ? 'SHORT' : 'LONG';
+        reason = `RSI${rsi.toFixed(0)} + FR${frPct>=0?'+':''}${frPct.toFixed(3)}%の歪み`;
+      } else if(rsi >= p.rsiOB && Math.abs(frPct) >= p.frThresh){
+        signal = frPct > 0 ? 'SHORT' : 'LONG';
+        reason = `RSI${rsi.toFixed(0)} + FR偏り${frPct.toFixed(3)}%`;
+      } else if(Math.abs(frPct) >= p.frThresh * 0.7){
+        state.status = 'ready';
+        state.readyDetail = { dir: frPct>0?'SHORT':'LONG', target:price, reason:`FR${frPct.toFixed(3)}%で歪み拡大中` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+    case 'alex': { // 1h multi-TF trend
+      const r1h = botComputeTF('1h');
+      const r4h = botComputeTF('4h');
+      if(!r1h || !r4h){ state.status = 'watching'; return; }
+      const aligned = r1h.signal === r4h.signal && r1h.signal !== 'WAIT';
+      if(aligned && r1h.score >= p.scoreEntry){
+        signal = r1h.signal;
+        reason = `1H(${r1h.score})+4H(${r4h.score})方向一致=${signal}` + (inds.delta?` + ${inds.delta.badge}`:'');
+      } else if(r1h.signal === r4h.signal && r1h.signal !== 'WAIT'){
+        state.status = 'ready';
+        state.readyDetail = { dir:r1h.signal, target:price, reason:`1H+4H方向一致(${r1h.signal}) スコア不足` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+    case 'yuki': { // 1h macro counter
+      const fg = S.fg;
+      const ls = S.ls;
+      const bb = inds.bb;
+      if(fg <= p.fgExtreme && ls < (100-p.lsThresh)){
+        signal = 'LONG';
+        reason = `F&G=${fg}(極恐怖) + L/S${ls.toFixed(0)}%(ショート過多)` + (bb?` + ${bb.badge}`:'');
+      } else if(fg >= p.fgGreed && ls > p.lsThresh){
+        signal = 'SHORT';
+        reason = `F&G=${fg}(極強欲) + L/S${ls.toFixed(0)}%(ロング過多)` + (bb?` + ${bb.badge}`:'');
+      } else if(fg <= p.fgExtreme+5 || fg >= p.fgGreed-5){
+        state.status = 'ready';
+        state.readyDetail = { dir: fg<=40?'LONG':'SHORT', target:price, reason:`F&G=${fg}で極値接近中` };
+      } else {
+        state.status = 'watching';
+        state.readyDetail = null;
+      }
+      break;
+    }
+  }
+
+  // Execute entry if signal found
+  if(signal){
+    const tp = signal==='LONG' ? price*(1+p.tpPct/100) : price*(1-p.tpPct/100);
+    const sl = signal==='LONG' ? price*(1-p.slPct/100) : price*(1+p.slPct/100);
+    state.position = { dir:signal, entry:price, time:now, tp, sl };
+    state.status = 'holding';
+    state.readyDetail = null;
+    state.lastMsg = `${def.name}が${signal}でエントリー！ @ $${price.toLocaleString('en',{maximumFractionDigits:0})}`;
+    addBotTradeLog(def, 'entry', signal, price, reason);
+  }
+}
+
+function checkBotExit(def, state, price, now){
+  const pos = state.position;
+  const p = state.params;
+  if(!pos) return;
+
+  const isLong = pos.dir === 'LONG';
+  const pnlPct = isLong ? (price - pos.entry)/pos.entry*100 : (pos.entry - price)/pos.entry*100;
+  const elapsed = (now - pos.time) / 60000; // minutes
+
+  let exitReason = null;
+  let exitType = null;
+
+  // TP hit
+  if(isLong && price >= pos.tp){ exitReason = '利確(TP到達)'; exitType = 'tp'; }
+  else if(!isLong && price <= pos.tp){ exitReason = '利確(TP到達)'; exitType = 'tp'; }
+  // SL hit
+  else if(isLong && price <= pos.sl){ exitReason = '損切り(SL到達)'; exitType = 'sl'; }
+  else if(!isLong && price >= pos.sl){ exitReason = '損切り(SL到達)'; exitType = 'sl'; }
+  // Timeout
+  else if(elapsed >= (p.timeoutMin||15)){ exitReason = '時間切れ決済'; exitType = pnlPct>0?'tp':'sl'; }
+
+  if(exitReason){
+    const win = pnlPct > 0;
+    state.trades.push({
+      dir: pos.dir, entry: pos.entry, exit: price,
+      pnlPct: +pnlPct.toFixed(3), win,
+      time: new Date(pos.time).toISOString(),
+      exitTime: new Date(now).toISOString(),
+      reason: exitReason,
+    });
+    if(win){ state.totalWins++; } else { state.totalLosses++; }
+    state.totalPnlPct = +(state.totalPnlPct + pnlPct).toFixed(3);
+    state.lastMsg = win
+      ? `${def.name}が利確！ +${pnlPct.toFixed(2)}% @ $${price.toLocaleString('en',{maximumFractionDigits:0})}`
+      : `${def.name}が損切り ${pnlPct.toFixed(2)}% @ $${price.toLocaleString('en',{maximumFractionDigits:0})}`;
+    state.position = null;
+    state.status = 'watching';
+    state.lastTradeTime = now;
+    addBotTradeLog(def, exitType, pos.dir, price, exitReason, pnlPct);
+    saveBotArena();
+  }
+}
+
+// Trade log buffer (in-memory, rendered in UI)
+let botTradeLogEntries = [];
+function addBotTradeLog(def, type, dir, price, reason, pnlPct){
+  const time = new Date().toLocaleTimeString('ja-JP',{hour12:false,hour:'2-digit',minute:'2-digit'});
+  botTradeLogEntries.unshift({ time, name:def.name, emoji:def.emoji, type, dir, price, reason, pnlPct });
+  if(botTradeLogEntries.length > 50) botTradeLogEntries = botTradeLogEntries.slice(0, 50);
+}
+
+// ── Run all bots ──
+function botEvalAll(){
+  if(!S.price) return;
+  BOT_DEFS.forEach(def=>{
+    const state = botStates[def.id];
+    if(state) evaluateBot(def, state);
+  });
+  if(botArenaVisible) renderBotArena();
+  // Save periodically (every 30s via caller or manual)
+}
+let _botSaveCounter = 0;
+function botEvalAndSave(){
+  botEvalAll();
+  _botSaveCounter++;
+  if(_botSaveCounter % 10 === 0) saveBotArena(); // save every ~30s if 3s interval
+}
+
+// ═══════════════════════════════════════════════
+// BOT ARENA UI RENDERING
+// ═══════════════════════════════════════════════
+
+function renderBotArena(){
+  renderLeaderboard();
+  renderBotCards();
+  renderTradeLog();
+  renderPerfBars();
+  renderPDCALog();
+}
+
+function renderLeaderboard(){
+  const cats = [
+    { label:'5分スキャルピング', ids:['john','mike'] },
+    { label:'15分トレード', ids:['sarah','emma'] },
+    { label:'1時間スイング', ids:['alex','yuki'] },
+  ];
+  const el = document.getElementById('baLeaders');
+  el.innerHTML = cats.map(cat=>{
+    // Find top bot in category by win rate
+    let best = null, bestRate = -1;
+    cat.ids.forEach(id=>{
+      const bs = botStates[id];
+      const total = bs.totalWins + bs.totalLosses;
+      const rate = total > 0 ? bs.totalWins/total*100 : 0;
+      if(rate > bestRate || (rate === bestRate && bs.totalPnlPct > (best?botStates[best].totalPnlPct:0))){
+        bestRate = rate; best = id;
+      }
+    });
+    if(!best) best = cat.ids[0];
+    const def = BOT_DEFS.find(d=>d.id===best);
+    const bs = botStates[best];
+    const total = bs.totalWins + bs.totalLosses;
+    const rate = total > 0 ? (bs.totalWins/total*100).toFixed(0) : '--';
+    const pnlCls = bs.totalPnlPct > 0 ? 'pos' : bs.totalPnlPct < 0 ? 'neg' : 'neut';
+    const todayPnl = getTodayPnl(bs);
+    const todayCls = todayPnl > 0 ? 'pos' : todayPnl < 0 ? 'neg' : 'neut';
+    return `<div class="ba-lead-card">
+      <div class="ba-lc-cat">${cat.label}</div>
+      <div class="ba-lc-name"><span class="ba-lc-crown">👑</span>${def.emoji} ${def.name}</div>
+      <div class="ba-lc-stats">
+        <div class="ba-lc-stat"><span class="ba-lc-stat-lbl">勝率</span><span class="ba-lc-stat-val ${pnlCls}">${rate}%</span></div>
+        <div class="ba-lc-stat"><span class="ba-lc-stat-lbl">勝/負</span><span class="ba-lc-stat-val">${bs.totalWins}/${bs.totalLosses}</span></div>
+        <div class="ba-lc-stat"><span class="ba-lc-stat-lbl">累計P&L</span><span class="ba-lc-stat-val ${pnlCls}">${bs.totalPnlPct>=0?'+':''}${bs.totalPnlPct.toFixed(2)}%</span></div>
+        <div class="ba-lc-stat"><span class="ba-lc-stat-lbl">本日P&L</span><span class="ba-lc-stat-val ${todayCls}">${todayPnl>=0?'+':''}${todayPnl.toFixed(2)}%</span></div>
+      </div>
+      <div class="ba-lc-style">${def.philosophy}</div>
+    </div>`;
+  }).join('');
+}
+
+function getTodayPnl(bs){
+  const today = new Date().toISOString().slice(0,10);
+  return bs.trades.filter(t=>t.exitTime&&t.exitTime.startsWith(today)).reduce((s,t)=>s+t.pnlPct,0);
+}
+
+function getTodayStats(bs){
+  const today = new Date().toISOString().slice(0,10);
+  const todayTrades = bs.trades.filter(t=>t.exitTime&&t.exitTime.startsWith(today));
+  const wins = todayTrades.filter(t=>t.win).length;
+  const losses = todayTrades.filter(t=>!t.win).length;
+  const pnl = todayTrades.reduce((s,t)=>s+t.pnlPct,0);
+  return { wins, losses, pnl, count: todayTrades.length };
+}
+
+function renderBotCards(){
+  const el = document.getElementById('baBots');
+  el.innerHTML = BOT_DEFS.map(def=>{
+    const bs = botStates[def.id];
+    const pos = bs.position;
+    const p = bs.params;
+    const total = bs.totalWins + bs.totalLosses;
+    const rate = total > 0 ? (bs.totalWins/total*100).toFixed(0) : '--';
+    const ts = getTodayStats(bs);
+
+    let statusCls = 'watching', statusText = '様子見', dirCls = '';
+    let detail = '', rationale = '', quote = def.quotes.watching;
+
+    if(pos){
+      statusCls = pos.dir==='SHORT'?'holding-short':'holding';
+      statusText = `${pos.dir} 保有中`;
+      dirCls = pos.dir==='LONG'?'dir-long':'dir-short';
+      const pnlPct = pos.dir==='LONG' ? (S.price-pos.entry)/pos.entry*100 : (pos.entry-S.price)/pos.entry*100;
+      const pnlCls = pnlPct>=0?'var(--green)':'var(--red)';
+      detail = `${pos.dir} @ $${pos.entry.toLocaleString('en',{maximumFractionDigits:0})} → 含み損益: <span style="color:${pnlCls};font-weight:700;">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</span><br>利確: $${pos.tp.toLocaleString('en',{maximumFractionDigits:0})} / 損切: $${pos.sl.toLocaleString('en',{maximumFractionDigits:0})}`;
+      rationale = bs.lastMsg || '';
+      quote = def.quotes.holding;
+    } else if(bs.status==='ready' && bs.readyDetail){
+      statusCls = 'ready'; statusText = `${bs.readyDetail.dir} 狙い中`;
+      detail = `${bs.readyDetail.dir}エントリー準備中 @ $${bs.readyDetail.target.toLocaleString('en',{maximumFractionDigits:0})}付近`;
+      rationale = bs.readyDetail.reason;
+      quote = def.quotes.ready;
+    } else {
+      detail = `次のシグナルを待機中... (${def.tf}足監視)`;
+      rationale = `TP: ±${p.tpPct}% / SL: ±${p.slPct}% / タイムアウト: ${p.timeoutMin||15}分`;
+    }
+
+    return `<div class="ba-bot st-${bs.status==='holding'?'holding':bs.status} ${dirCls}">
+      <div class="ba-bot-top">
+        <span class="ba-bot-emoji">${def.emoji}</span>
+        <span class="ba-bot-name">${def.name}</span>
+        <span class="ba-bot-cat">${def.cat}</span>
+        <span class="ba-bot-status ${statusCls}">${statusText}</span>
+      </div>
+      <div class="ba-bot-detail">${detail}</div>
+      ${rationale?`<div class="ba-bot-rationale">根拠: ${rationale}</div>`:''}
+      <div class="ba-bot-quote">「${quote}」</div>
+      <div class="ba-bot-mini-stats">
+        <span>勝率:${rate}%</span>
+        <span>勝${bs.totalWins}/負${bs.totalLosses}</span>
+        <span>累計:${bs.totalPnlPct>=0?'+':''}${bs.totalPnlPct.toFixed(2)}%</span>
+        <span>本日:${ts.count}回(${ts.pnl>=0?'+':''}${ts.pnl.toFixed(2)}%)</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderTradeLog(){
+  const el = document.getElementById('baLog');
+  if(botTradeLogEntries.length === 0){
+    el.innerHTML = '<div style="color:var(--dim);font-size:.64rem;">トレード履歴がまだありません...</div>';
+    return;
+  }
+  el.innerHTML = botTradeLogEntries.slice(0,20).map(e=>{
+    if(e.type==='entry'){
+      return `<div class="ba-log-item">
+        <span class="ba-log-time">${e.time}</span>
+        <span class="ba-log-name">${e.emoji}${e.name}</span>
+        <span class="ba-log-dir ${e.dir}">${e.dir}</span>
+        <span>エントリー @ $${e.price.toLocaleString('en',{maximumFractionDigits:0})}</span>
+        <span style="color:var(--dim);font-size:.58rem;">${e.reason}</span>
+      </div>`;
+    } else {
+      const pnlCls = (e.pnlPct||0)>=0?'win':'lose';
+      return `<div class="ba-log-item">
+        <span class="ba-log-time">${e.time}</span>
+        <span class="ba-log-name">${e.emoji}${e.name}</span>
+        <span class="ba-log-dir ${e.dir}">${e.dir}</span>
+        <span class="ba-log-pnl" style="color:${(e.pnlPct||0)>=0?'var(--green)':'var(--red)'}">${(e.pnlPct||0)>=0?'+':''}${(e.pnlPct||0).toFixed(2)}%</span>
+        <span class="ba-log-result ${pnlCls}">${pnlCls==='win'?'WIN':'LOSE'}</span>
+        <span style="color:var(--dim);font-size:.58rem;">${e.reason}</span>
+      </div>`;
+    }
+  }).join('');
+}
+
+function renderPerfBars(){
+  const el = document.getElementById('baPerf');
+  el.innerHTML = BOT_DEFS.map(def=>{
+    const bs = botStates[def.id];
+    const total = bs.totalWins + bs.totalLosses;
+    const rate = total > 0 ? bs.totalWins/total*100 : 0;
+    const pnlCls = bs.totalPnlPct>=0?'var(--green)':'var(--red)';
+    return `<div class="ba-perf-row">
+      <span class="ba-perf-name">${def.emoji}${def.name}</span>
+      <div class="ba-perf-bar-wrap"><div class="ba-perf-bar" style="width:${rate}%"></div></div>
+      <span class="ba-perf-val" style="color:${pnlCls}">${rate.toFixed(0)}% (${bs.totalPnlPct>=0?'+':''}${bs.totalPnlPct.toFixed(1)}%)</span>
+    </div>`;
+  }).join('');
+}
+
+function renderPDCALog(){
+  const el = document.getElementById('baPdcaLog');
+  // Gather all PDCA logs across bots, sorted by time
+  const allLogs = [];
+  BOT_DEFS.forEach(def=>{
+    const bs = botStates[def.id];
+    (bs.pdcaLog||[]).forEach(log=>allLogs.push({...log, name:def.name, emoji:def.emoji}));
+  });
+  allLogs.sort((a,b)=>(b.time||0)-(a.time||0));
+  if(allLogs.length===0){
+    el.textContent = '初回PDCA改善は本日23:59 JSTに自動実行されます...';
+    return;
+  }
+  el.innerHTML = allLogs.slice(0,10).map(l=>{
+    const d = new Date(l.time).toLocaleDateString('ja-JP');
+    return `<div>${d} — ${l.emoji}${l.name}: ${l.msg}</div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// DAILY PDCA AUTO-IMPROVEMENT
+// ═══════════════════════════════════════════════
+
+function schedulePDCA(){
+  // Schedule for 23:59 JST today (or next occurrence)
+  const now = new Date();
+  const jst = new Date(now.getTime() + 9*3600000); // UTC -> JST
+  const target = new Date(jst);
+  target.setHours(23,59,0,0);
+  if(jst >= target) target.setDate(target.getDate()+1); // next day
+  const delay = target.getTime() - jst.getTime();
+  setTimeout(()=>{
+    runDailyPDCA();
+    schedulePDCA(); // reschedule for next day
+  }, Math.max(delay, 60000)); // at least 1 min delay
+}
+
+function runDailyPDCA(){
+  const today = new Date().toISOString().slice(0,10);
+  const categories = [
+    { ids:['john','mike'] },
+    { ids:['sarah','emma'] },
+    { ids:['alex','yuki'] },
+  ];
+
+  categories.forEach(cat=>{
+    // Calculate today's performance for each bot in category
+    const botPerf = cat.ids.map(id=>{
+      const bs = botStates[id];
+      const todayTrades = bs.trades.filter(t=>t.exitTime&&t.exitTime.startsWith(today));
+      const wins = todayTrades.filter(t=>t.win).length;
+      const losses = todayTrades.filter(t=>!t.win).length;
+      const pnl = todayTrades.reduce((s,t)=>s+t.pnlPct,0);
+      return { id, wins, losses, pnl, total: wins+losses };
+    });
+
+    // Store daily stats
+    botPerf.forEach(bp=>{
+      const bs = botStates[bp.id];
+      bs.dailyStats.push({ date:today, wins:bp.wins, losses:bp.losses, pnlPct:+bp.pnl.toFixed(3), tradeCount:bp.total });
+    });
+
+    // Find winner and loser
+    const sorted = [...botPerf].sort((a,b)=>{
+      const rA = a.total>0 ? a.wins/a.total : 0;
+      const rB = b.total>0 ? b.wins/b.total : 0;
+      return rB - rA || b.pnl - a.pnl;
+    });
+    const winner = sorted[0];
+    const loser = sorted[sorted.length-1];
+    if(winner.id === loser.id) return; // same bot, nothing to adjust
+
+    // Adjust loser's params toward winner's params
+    const winParams = botStates[winner.id].params;
+    const loseParams = botStates[loser.id].params;
+    const adjustments = [];
+
+    // Adjust numeric params: move 20% toward winner + 5% random exploration
+    ['tpPct','slPct','timeoutMin','cooldownMin'].forEach(key=>{
+      if(winParams[key] !== undefined && loseParams[key] !== undefined){
+        const old = loseParams[key];
+        const diff = winParams[key] - loseParams[key];
+        const exploration = (Math.random()-0.5) * 0.1 * Math.abs(winParams[key]);
+        const newVal = +(old + diff * 0.2 + exploration).toFixed(3);
+        if(key==='tpPct') loseParams[key] = Math.max(0.05, Math.min(2.0, newVal));
+        else if(key==='slPct') loseParams[key] = Math.max(0.05, Math.min(1.0, newVal));
+        else if(key==='timeoutMin') loseParams[key] = Math.max(5, Math.min(120, Math.round(newVal)));
+        else if(key==='cooldownMin') loseParams[key] = Math.max(1, Math.min(30, Math.round(newVal)));
+        if(loseParams[key] !== old){
+          adjustments.push(`${key}: ${old}→${loseParams[key]}`);
+        }
+      }
+    });
+
+    // Also adjust strategy-specific thresholds
+    ['scoreEntry','rsiOB','rsiOS','fgExtreme','fgGreed','lsThresh','frThresh'].forEach(key=>{
+      if(winParams[key] !== undefined && loseParams[key] !== undefined){
+        const old = loseParams[key];
+        const diff = winParams[key] - loseParams[key];
+        const exploration = (Math.random()-0.5) * 0.05 * Math.abs(winParams[key]||1);
+        loseParams[key] = +(old + diff * 0.15 + exploration).toFixed(3);
+        if(loseParams[key] !== old) adjustments.push(`${key}: ${old}→${loseParams[key]}`);
+      }
+    });
+
+    if(adjustments.length > 0){
+      const loserDef = BOT_DEFS.find(d=>d.id===loser.id);
+      const winnerDef = BOT_DEFS.find(d=>d.id===winner.id);
+      const msg = `${winnerDef.name}の成績を参考に調整: ${adjustments.join(', ')}`;
+      botStates[loser.id].pdcaLog.push({ time:Date.now(), msg });
+    }
+  });
+
+  saveBotArena();
+  if(botArenaVisible) renderBotArena();
+}
+
+// Make runDailyPDCA available in console for testing
+window.runDailyPDCA = runDailyPDCA;
+
+// Initialize Bot Arena
+initBotArena();
 </script>
 
 
