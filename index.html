@@ -437,6 +437,124 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .coin-sep{color:var(--border);font-size:.7rem;margin:0 2px;}
 .bot-arena-btn.active{background:rgba(167,139,250,.18)!important;color:#c4b5fd!important;border-color:rgba(167,139,250,.45)!important;box-shadow:0 0 8px rgba(167,139,250,.15)!important;}
 
+/* ══ OVERVIEW SECTION ══ */
+.overview-btn.active{background:rgba(0,212,255,.18)!important;color:var(--accent)!important;border-color:rgba(0,212,255,.45)!important;box-shadow:0 0 12px rgba(0,212,255,.25)!important;}
+#overviewSection{display:none;padding:10px 12px;max-width:480px;margin:0 auto;}
+#overviewSection.visible{display:block;}
+
+/* OV Header */
+.ov-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;margin-bottom:10px;border:1px solid rgba(0,212,255,.25);border-radius:6px;background:rgba(0,212,255,.04);}
+.ov-title{font-family:'Share Tech Mono',monospace;font-size:.82rem;font-weight:700;color:var(--accent);letter-spacing:.08em;}
+.ov-session{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:#00ff88;border:1px solid rgba(0,255,136,.3);border-radius:3px;padding:2px 6px;background:rgba(0,255,136,.08);}
+.ov-clock{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--text);letter-spacing:.05em;}
+
+/* OV Heatmap Grid */
+.ov-heatmap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.ov-coin{position:relative;border-radius:8px;padding:10px 12px;cursor:pointer;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;min-height:80px;}
+.ov-coin.bull{background:linear-gradient(135deg,rgba(0,128,60,.55),rgba(0,80,35,.4));border-color:rgba(0,255,136,.3);}
+.ov-coin.bear{background:linear-gradient(135deg,rgba(128,20,30,.55),rgba(80,10,20,.4));border-color:rgba(255,45,85,.3);}
+.ov-coin.neut{background:linear-gradient(135deg,rgba(80,80,40,.4),rgba(50,50,25,.3));border-color:rgba(255,214,10,.2);}
+.ov-coin.focused{box-shadow:0 0 16px rgba(0,212,255,.35);border-color:rgba(0,212,255,.5)!important;}
+.ov-coin-name{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.7);font-weight:700;display:flex;align-items:center;gap:4px;}
+.ov-coin-name .ov-arrow{font-size:.65rem;}
+.ov-coin-price{font-family:'Share Tech Mono',monospace;font-size:1.05rem;font-weight:900;color:var(--text);margin:2px 0;}
+.ov-coin-score{font-family:'Share Tech Mono',monospace;font-size:.56rem;color:rgba(255,255,255,.5);}
+.ov-coin-signal{position:absolute;top:8px;right:10px;font-family:'Share Tech Mono',monospace;font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:3px;}
+.ov-coin-signal.LONG{color:#00ff88;background:rgba(0,255,136,.12);border:1px solid rgba(0,255,136,.25);}
+.ov-coin-signal.SHORT{color:#ff2d55;background:rgba(255,45,85,.12);border:1px solid rgba(255,45,85,.25);}
+.ov-coin-signal.WAIT{color:#ffd60a;background:rgba(255,214,10,.1);border:1px solid rgba(255,214,10,.2);}
+.ov-spark{position:absolute;bottom:0;left:0;right:0;height:32px;opacity:.45;}
+
+/* OV Gauge */
+.ov-gauge-wrap{text-align:center;margin:8px 0 12px;position:relative;}
+.ov-gauge-svg{display:block;margin:0 auto;max-width:240px;filter:drop-shadow(0 0 10px rgba(0,212,255,.3));}
+.ov-gauge-label{font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);letter-spacing:.1em;margin-top:4px;}
+.ov-gauge-meta{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;max-width:300px;margin:6px auto 0;font-family:'Share Tech Mono',monospace;font-size:.5rem;}
+.ov-meta-item{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.ov-meta-key{color:var(--dim);text-transform:uppercase;letter-spacing:.06em;}
+.ov-meta-val{color:var(--accent);font-weight:700;}
+.ov-meta-val.bull{color:var(--green);}
+.ov-meta-val.bear{color:var(--red);}
+.ov-meta-val.neut{color:var(--yellow);}
+
+/* Signal Nature Badge for Overview */
+.ov-signal-nature{text-align:center;margin:4px 0 8px;font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:4px 10px;border-radius:4px;display:inline-block;}
+.ov-signal-nature.reversal{color:#ff9f43;background:rgba(255,159,67,.1);border:1px solid rgba(255,159,67,.25);}
+.ov-signal-nature.momentum{color:#00d4ff;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);}
+.ov-signal-nature.mixed{color:var(--dim);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+
+/* OV AI Insight */
+.ov-insight{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin-bottom:10px;border:1px solid rgba(0,212,255,.15);border-left:3px solid rgba(0,212,255,.4);border-radius:6px;background:rgba(0,212,255,.03);}
+.ov-insight-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.ov-insight-text{font-size:.68rem;color:var(--dim);line-height:1.5;}
+
+/* OV Mini Badges */
+.ov-badges{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.ov-badge{flex:1;min-width:60px;text-align:center;padding:8px 4px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.02);}
+.ov-badge-label{font-family:'Share Tech Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text);display:block;margin-bottom:2px;}
+.ov-badge-val{font-family:'Share Tech Mono',monospace;font-size:.72rem;font-weight:700;display:block;}
+.ov-badge.green{border-color:rgba(0,255,136,.25);}
+.ov-badge.red{border-color:rgba(255,45,85,.25);}
+.ov-badge.yellow{border-color:rgba(255,214,10,.2);}
+.ov-badge.cyan{border-color:rgba(0,212,255,.25);}
+
+/* OV Range Bars */
+.ov-range-wrap{margin-bottom:10px;padding:8px 10px;border:1px solid rgba(255,255,255,.06);border-radius:6px;background:rgba(255,255,255,.015);}
+.ov-range-title{font-family:'Share Tech Mono',monospace;font-size:.56rem;color:var(--dim);margin-bottom:6px;letter-spacing:.08em;}
+.ov-range-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-family:'Share Tech Mono',monospace;font-size:.52rem;}
+.ov-range-tf{width:28px;color:var(--dim);text-align:right;flex-shrink:0;}
+.ov-range-bar{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;position:relative;}
+.ov-range-fill{height:100%;border-radius:4px;transition:width .6s ease,background .5s ease;}
+.ov-range-fill.high{background:linear-gradient(90deg,rgba(255,45,85,.6),rgba(255,45,85,.9));}
+.ov-range-fill.mid{background:linear-gradient(90deg,rgba(255,214,10,.5),rgba(255,214,10,.8));}
+.ov-range-fill.low{background:linear-gradient(90deg,rgba(0,255,136,.5),rgba(0,255,136,.8));}
+.ov-range-fill.break-up{background:linear-gradient(90deg,rgba(0,212,255,.6),rgba(0,212,255,.9));animation:ov-blink 1s infinite;}
+.ov-range-fill.break-down{background:linear-gradient(90deg,rgba(255,45,85,.7),rgba(255,45,85,1));animation:ov-blink 1s infinite;}
+@keyframes ov-blink{0%,100%{opacity:1;}50%{opacity:.5;}}
+.ov-range-pct{width:32px;text-align:right;flex-shrink:0;}
+.ov-range-status{width:56px;font-weight:700;flex-shrink:0;}
+.ov-range-dev{width:70px;color:var(--dim);text-align:right;flex-shrink:0;}
+
+/* OV Bot Status */
+.ov-bot{padding:6px 10px;margin-bottom:8px;border:1px solid rgba(167,139,250,.2);border-radius:5px;background:rgba(167,139,250,.04);font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);}
+.ov-bot strong{color:#c4b5fd;}
+
+/* OV Bottom Status */
+.ov-status{display:flex;justify-content:space-between;padding:6px 10px;border:1px solid rgba(0,212,255,.12);border-radius:5px;background:rgba(0,212,255,.03);font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);margin-bottom:12px;flex-wrap:wrap;gap:4px;}
+.ov-status span{white-space:nowrap;}
+
+/* OV Drill-down Cards */
+.ov-drill{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.ov-drill-card{border:1px solid rgba(255,255,255,.08);border-radius:6px;background:rgba(255,255,255,.02);overflow:hidden;transition:border-color .3s ease;}
+.ov-drill-card.open{border-color:rgba(0,212,255,.25);}
+.ov-drill-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--text);font-weight:700;user-select:none;}
+.ov-drill-header::after{content:'▸';color:var(--dim);transition:transform .3s ease;font-size:.8rem;}
+.ov-drill-card.open .ov-drill-header::after{transform:rotate(90deg);color:var(--accent);}
+.ov-drill-badge{font-size:.55rem;padding:1px 6px;border-radius:3px;font-weight:700;margin-left:8px;}
+.ov-drill-badge.bull{color:#00ff88;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2);}
+.ov-drill-badge.bear{color:#ff2d55;background:rgba(255,45,85,.1);border:1px solid rgba(255,45,85,.2);}
+.ov-drill-badge.neut{color:var(--yellow);background:rgba(255,214,10,.08);border:1px solid rgba(255,214,10,.15);}
+.ov-drill-body{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 12px;}
+.ov-drill-card.open .ov-drill-body{max-height:800px;padding:0 12px 12px;}
+
+/* Drill-down inner content */
+.ov-dd-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-family:'Share Tech Mono',monospace;font-size:.55rem;}
+.ov-dd-label{color:var(--dim);width:55px;flex-shrink:0;}
+.ov-dd-bar{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.ov-dd-fill{height:100%;border-radius:3px;transition:width .5s ease;}
+.ov-dd-fill.bull{background:var(--green);}
+.ov-dd-fill.bear{background:var(--red);}
+.ov-dd-fill.neut{background:var(--yellow);}
+.ov-dd-val{width:32px;text-align:right;font-weight:700;flex-shrink:0;}
+.ov-dd-sig{width:42px;text-align:center;font-weight:700;font-size:.5rem;flex-shrink:0;}
+.ov-dd-sig.LONG{color:#00ff88;}.ov-dd-sig.SHORT{color:#ff2d55;}.ov-dd-sig.WAIT{color:#ffd60a;}
+.ov-dd-conf{width:42px;text-align:right;color:var(--dim);font-size:.48rem;flex-shrink:0;}
+.ov-dd-note{font-size:.52rem;color:var(--dim);padding:6px 0 2px;line-height:1.5;}
+
+/* Pulse animation for score changes */
+@keyframes ov-pulse{0%{box-shadow:0 0 5px rgba(0,212,255,.2);}50%{box-shadow:0 0 20px rgba(0,212,255,.5);}100%{box-shadow:0 0 5px rgba(0,212,255,.2);}}
+.ov-pulse{animation:ov-pulse 1.5s ease-in-out;}
+
 /* ══ BOT ARENA ══ */
 #botArenaSection{display:none;}
 #botArenaSection.visible{display:block;}
@@ -620,6 +738,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="topbar">
   <div class="logo">⬡ <span data-coin-name>BTC</span>先物 スキャルシグナル <span style="color:var(--dim);font-size:.62rem;">— スキャルピング特化</span></div>
   <div class="coin-switcher">
+    <button class="coin-btn overview-btn" id="overviewTab" onclick="toggleOverview()">◈ 総合</button>
+    <span class="coin-sep">|</span>
     <button class="coin-btn active" data-coin="BTC" onclick="switchCoin('BTC')">BTC</button>
     <button class="coin-btn" data-coin="ETH" onclick="switchCoin('ETH')">ETH</button>
     <button class="coin-btn" data-coin="XRP" onclick="switchCoin('XRP')">XRP</button>
@@ -1208,6 +1328,157 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 </div>
 </div><!-- /mainDashboard -->
+
+<!-- OVERVIEW SECTION -->
+<div id="overviewSection">
+
+  <!-- Header -->
+  <div class="ov-header">
+    <span class="ov-title">OVERVIEW | 概要</span>
+    <span class="ov-session" id="ovSession">ACTIVE SESSION</span>
+    <span class="ov-clock" id="ovClock">00:00:00</span>
+  </div>
+
+  <!-- Score Heatmap 2x2 -->
+  <div class="ov-label" style="font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);margin-bottom:4px;letter-spacing:.1em;">SCORE HEATMAP</div>
+  <div class="ov-heatmap">
+    <div class="ov-coin neut" id="ov-BTC" onclick="ovSelectCoin('BTC')">
+      <div class="ov-coin-name">BTC<span style="color:var(--dim)">/USDT</span> <span class="ov-arrow" id="ovArrow-BTC"></span></div>
+      <div class="ov-coin-price" id="ovPrice-BTC">--</div>
+      <div class="ov-coin-score" id="ovScore-BTC">TRADING SCORE 0-100</div>
+      <div class="ov-coin-signal WAIT" id="ovSig-BTC">WAIT</div>
+      <canvas class="ov-spark" id="ovSpark-BTC" width="180" height="32"></canvas>
+    </div>
+    <div class="ov-coin neut" id="ov-ETH" onclick="ovSelectCoin('ETH')">
+      <div class="ov-coin-name">ETH<span style="color:var(--dim)">/USDT</span> <span class="ov-arrow" id="ovArrow-ETH"></span></div>
+      <div class="ov-coin-price" id="ovPrice-ETH">--</div>
+      <div class="ov-coin-score" id="ovScore-ETH">TRADING SCORE 0-100</div>
+      <div class="ov-coin-signal WAIT" id="ovSig-ETH">WAIT</div>
+      <canvas class="ov-spark" id="ovSpark-ETH" width="180" height="32"></canvas>
+    </div>
+    <div class="ov-coin neut" id="ov-XRP" onclick="ovSelectCoin('XRP')">
+      <div class="ov-coin-name">XRP<span style="color:var(--dim)">/USDT</span> <span class="ov-arrow" id="ovArrow-XRP"></span></div>
+      <div class="ov-coin-price" id="ovPrice-XRP">--</div>
+      <div class="ov-coin-score" id="ovScore-XRP">TRADING SCORE 0-100</div>
+      <div class="ov-coin-signal WAIT" id="ovSig-XRP">WAIT</div>
+      <canvas class="ov-spark" id="ovSpark-XRP" width="180" height="32"></canvas>
+    </div>
+    <div class="ov-coin neut" id="ov-SOL" onclick="ovSelectCoin('SOL')">
+      <div class="ov-coin-name">SOL<span style="color:var(--dim)">/USDT</span> <span class="ov-arrow" id="ovArrow-SOL"></span></div>
+      <div class="ov-coin-price" id="ovPrice-SOL">--</div>
+      <div class="ov-coin-score" id="ovScore-SOL">TRADING SCORE 0-100</div>
+      <div class="ov-coin-signal WAIT" id="ovSig-SOL">WAIT</div>
+      <canvas class="ov-spark" id="ovSpark-SOL" width="180" height="32"></canvas>
+    </div>
+  </div>
+
+  <!-- Signal & Trend text (left/right of gauge) -->
+  <div style="display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:.48rem;color:var(--dim);margin-bottom:2px;">
+    <div id="ovGaugeLeft">SIGNAL: --<br>TREND: --</div>
+    <div id="ovGaugeRight" style="text-align:right;">SIGNAL: --<br>TREND: --</div>
+  </div>
+
+  <!-- Main Gauge -->
+  <div class="ov-gauge-wrap">
+    <svg class="ov-gauge-svg" viewBox="0 0 200 125" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background arc -->
+      <path d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="10" stroke-linecap="round"/>
+      <!-- Colored arc -->
+      <path id="ovGaugeArc" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="125.7"/>
+      <!-- Tick marks 0-5 -->
+      <text x="18" y="118" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">0</text>
+      <text x="28" y="62" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">1</text>
+      <text x="62" y="30" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">2</text>
+      <text x="100" y="20" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">3</text>
+      <text x="138" y="30" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">4</text>
+      <text x="172" y="62" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">5</text>
+      <text x="182" y="118" fill="var(--dim)" font-size="7" font-family="Share Tech Mono" text-anchor="middle">100</text>
+      <!-- Needle -->
+      <line id="ovGaugeNeedle" x1="100" y1="105" x2="100" y2="35" stroke="var(--text)" stroke-width="2" stroke-linecap="round" style="transition:transform .8s cubic-bezier(.34,1.56,.64,1);transform-origin:100px 105px;"/>
+      <!-- Center dot -->
+      <circle cx="100" cy="105" r="4" fill="var(--accent)" opacity=".8"/>
+      <!-- Score number -->
+      <text id="ovGaugeNum" x="100" y="90" fill="var(--accent)" font-size="36" font-weight="900" font-family="Share Tech Mono" text-anchor="middle" dominant-baseline="middle">--</text>
+      <!-- Signal label -->
+      <text id="ovGaugeSig" x="100" y="108" fill="var(--accent)" font-size="10" font-weight="700" font-family="Share Tech Mono" text-anchor="middle">WAIT</text>
+    </svg>
+    <div class="ov-gauge-label">5 LEVEL STRENGTH</div>
+  </div>
+
+  <!-- Gauge Metadata (Confidence, Persistence, etc.) -->
+  <div style="display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:.44rem;color:var(--dim);margin:-4px 8px 8px;">
+    <div id="ovMetaLeft">VOLATILITY: --<br>CONFIDENCE: --<br>TIME HORIZON: --<br>DATA-SYNC: --</div>
+    <div id="ovMetaRight" style="text-align:right;">VOLATILITY: --<br>CONFIDENCE: --<br>TIME HORIZON: --<br>DATA-SYNC: --</div>
+  </div>
+
+  <!-- AI Insight -->
+  <div class="ov-label" style="font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);margin-bottom:4px;letter-spacing:.1em;">AI INSIGHT TEXT BOX</div>
+  <div class="ov-insight">
+    <span class="ov-insight-icon">🧠</span>
+    <span class="ov-insight-text" id="ovInsightText">データ取得中...</span>
+  </div>
+
+  <!-- Mini Metric Badges -->
+  <div class="ov-label" style="font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);margin-bottom:4px;letter-spacing:.1em;">MINI METRIC BADGES</div>
+  <div class="ov-badges">
+    <div class="ov-badge green" id="ovBadgeFR">
+      <span class="ov-badge-label">FR</span>
+      <span class="ov-badge-val" style="color:var(--green);" id="ovValFR">--</span>
+    </div>
+    <div class="ov-badge cyan" id="ovBadgeLS">
+      <span class="ov-badge-label">L/S</span>
+      <span class="ov-badge-val" style="color:var(--accent);" id="ovValLS">--</span>
+    </div>
+    <div class="ov-badge yellow" id="ovBadgeFGI">
+      <span class="ov-badge-label">FGI</span>
+      <span class="ov-badge-val" style="color:var(--yellow);" id="ovValFGI">--</span>
+    </div>
+    <div class="ov-badge red" id="ovBadgeOI">
+      <span class="ov-badge-label">OI</span>
+      <span class="ov-badge-val" style="color:var(--red);" id="ovValOI">--</span>
+    </div>
+  </div>
+
+  <!-- Range Position Bars -->
+  <div class="ov-range-wrap" id="ovRangeWrap">
+    <div class="ov-range-title">RANGE POSITION — <span id="ovRangeCoin">BTC</span></div>
+    <div id="ovRangeBars">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Bot Status -->
+  <div class="ov-label" style="font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--dim);margin-bottom:4px;letter-spacing:.1em;">BOT STATUS BAR</div>
+  <div class="ov-bot" id="ovBot">-- | POSITION: -- | PNL: --</div>
+
+  <!-- Bottom Status -->
+  <div class="ov-status" id="ovStatus">
+    <span id="ovStatusEvent">CPI DATA: --</span>
+    <span id="ovStatusRisk">RISK LEVEL: --</span>
+    <span id="ovStatusTF">TF: --</span>
+  </div>
+
+  <!-- Drill-down Categories -->
+  <div class="ov-drill">
+    <div class="ov-drill-card" id="ovDrillSignal">
+      <div class="ov-drill-header" onclick="ovToggleDrill('Signal')">📡 シグナル <span class="ov-drill-badge neut" id="ovDrillSignalBadge">--</span></div>
+      <div class="ov-drill-body" id="ovDrillSignalBody"></div>
+    </div>
+    <div class="ov-drill-card" id="ovDrillTech">
+      <div class="ov-drill-header" onclick="ovToggleDrill('Tech')">📊 テクニカル <span class="ov-drill-badge neut" id="ovDrillTechBadge">--</span></div>
+      <div class="ov-drill-body" id="ovDrillTechBody"></div>
+    </div>
+    <div class="ov-drill-card" id="ovDrillSenti">
+      <div class="ov-drill-header" onclick="ovToggleDrill('Senti')">🧠 センチメント <span class="ov-drill-badge neut" id="ovDrillSentiBadge">--</span></div>
+      <div class="ov-drill-body" id="ovDrillSentiBody"></div>
+    </div>
+    <div class="ov-drill-card" id="ovDrillMacro">
+      <div class="ov-drill-header" onclick="ovToggleDrill('Macro')">🌍 マクロ <span class="ov-drill-badge neut" id="ovDrillMacroBadge">--</span></div>
+      <div class="ov-drill-body" id="ovDrillMacroBody"></div>
+    </div>
+  </div>
+
+</div><!-- /overviewSection -->
 
 <!-- BOT ARENA SECTION -->
 <div id="botArenaSection">
@@ -3899,7 +4170,7 @@ function toggleBotArena(){
   if(botArenaVisible) renderBotArena();
 }
 
-// Also update switchCoin to exit bot arena
+// Also update switchCoin to exit bot arena AND overview
 const _origSwitchCoin = switchCoin;
 switchCoin = async function(key){
   if(botArenaVisible){
@@ -3908,8 +4179,728 @@ switchCoin = async function(key){
     document.getElementById('botArenaSection').classList.remove('visible');
     document.getElementById('botArenaTab').classList.remove('active');
   }
+  if(overviewVisible){
+    overviewVisible = false;
+    document.getElementById('mainDashboard').classList.remove('hidden');
+    document.getElementById('overviewSection').classList.remove('visible');
+    document.getElementById('overviewTab').classList.remove('active');
+  }
   return _origSwitchCoin(key);
 };
+
+// ═══════════════════════════════════════════════
+// OVERVIEW (総合) PAGE
+// ═══════════════════════════════════════════════
+let overviewVisible = false;
+let ovInterval = null;
+let ovFocusCoin = 'BTC';
+let ovStartTime = null;
+
+// ── Overview State per coin ──
+const OV = {};
+Object.keys(COINS).forEach(k => {
+  OV[k] = {
+    price: 0, p24h: 0, pctChg: 0,
+    fr: 0, ls: 50, oiVal: 0, oiPrev: 0, fg: 50,
+    k5m: [], k15m: [], k1h: [], k4h: [],
+    composite: 50, signal: 'WAIT',
+    tfScores: {}, tfSignals: {}, tfInds: {},
+    sparkData: [],
+    confidence: 50, persistence: 50,
+  };
+});
+
+function toggleOverview() {
+  overviewVisible = !overviewVisible;
+  // Hide main + bot arena
+  document.getElementById('mainDashboard').classList.toggle('hidden', overviewVisible);
+  document.getElementById('overviewSection').classList.toggle('visible', overviewVisible);
+  document.getElementById('overviewTab').classList.toggle('active', overviewVisible);
+  if(botArenaVisible){
+    botArenaVisible = false;
+    document.getElementById('botArenaSection').classList.remove('visible');
+    document.getElementById('botArenaTab').classList.remove('active');
+  }
+  if(overviewVisible){
+    ovStartTime = Date.now();
+    initOverview();
+  } else {
+    if(ovInterval) clearInterval(ovInterval);
+    ovInterval = null;
+  }
+}
+
+function toggleBotArenaFromOverview(){
+  // Also exit overview when entering bot arena
+  if(overviewVisible){
+    overviewVisible = false;
+    document.getElementById('overviewSection').classList.remove('visible');
+    document.getElementById('overviewTab').classList.remove('active');
+  }
+}
+// Patch toggleBotArena
+const _origToggleBotArena = toggleBotArena;
+toggleBotArena = function(){
+  toggleBotArenaFromOverview();
+  _origToggleBotArena();
+};
+
+// ── Multi-coin fetch ──
+async function fetchOverviewData() {
+  const coins = Object.keys(COINS);
+  await Promise.allSettled(coins.map(async (key) => {
+    const pair = COINS[key].pair;
+    const fetches = [
+      safeFetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`),
+      safeFetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=1h&limit=50`),
+      safeFetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=4h&limit=50`),
+    ];
+    // FR with fallback
+    fetches.push(
+      safeFetch(`https://fapi.binance.com/fapi/v1/fundingRate?symbol=${pair}&limit=1`)
+        .catch(() => safeFetch(`https://fapi.binance.com/fapi/v1/fundingRate?symbol=${pair}&limit=1`, true))
+        .catch(() => null)
+    );
+    // L/S ratio
+    fetches.push(
+      safeFetch(`https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=${pair}&period=5m&limit=1`)
+        .catch(() => safeFetch(`https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=${pair}&period=5m&limit=1`, true))
+        .catch(() => null)
+    );
+    // OI
+    fetches.push(
+      safeFetch(`https://fapi.binance.com/fapi/v1/openInterest?symbol=${pair}`)
+        .catch(() => safeFetch(`https://fapi.binance.com/fapi/v1/openInterest?symbol=${pair}`, true))
+        .catch(() => null)
+    );
+    const [ticker, k1h, k4h, frData, lsData, oiData] = await Promise.allSettled(fetches);
+    if(ticker.status==='fulfilled' && ticker.value){
+      OV[key].price = parseFloat(ticker.value.lastPrice);
+      OV[key].pctChg = parseFloat(ticker.value.priceChangePercent);
+      OV[key].p24h = OV[key].price / (1 + OV[key].pctChg/100);
+    }
+    if(k1h.status==='fulfilled' && k1h.value) OV[key].k1h = k1h.value;
+    if(k4h.status==='fulfilled' && k4h.value) OV[key].k4h = k4h.value;
+    if(frData.status==='fulfilled' && frData.value?.[0]) OV[key].fr = parseFloat(frData.value[0].fundingRate);
+    if(lsData.status==='fulfilled' && lsData.value?.[0]){
+      const r = parseFloat(lsData.value[0].longShortRatio);
+      OV[key].ls = (r/(1+r))*100;
+    }
+    if(oiData.status==='fulfilled' && oiData.value){
+      const v = parseFloat(oiData.value.openInterest);
+      if(OV[key].oiVal > 0) OV[key].oiPrev = OV[key].oiVal;
+      OV[key].oiVal = v;
+    }
+    // Sparkline from 1h
+    if(OV[key].k1h && OV[key].k1h.length >= 24){
+      OV[key].sparkData = OV[key].k1h.slice(-24).map(k => parseFloat(k[4]));
+    }
+  }));
+  // FGI (shared)
+  try{
+    const fg = await safeFetch('https://api.alternative.me/fng/?limit=1');
+    if(fg.data && fg.data[0]){
+      const v = parseInt(fg.data[0].value);
+      Object.keys(OV).forEach(k => OV[k].fg = v);
+    }
+  }catch(e){}
+  // Focus coin: fetch 5m+15m for range analysis
+  const fp = COINS[ovFocusCoin].pair;
+  const [k5m, k15m] = await Promise.allSettled([
+    safeFetch(`https://api.binance.com/api/v3/klines?symbol=${fp}&interval=5m&limit=50`),
+    safeFetch(`https://api.binance.com/api/v3/klines?symbol=${fp}&interval=15m&limit=50`),
+  ]);
+  if(k5m.status==='fulfilled' && k5m.value) OV[ovFocusCoin].k5m = k5m.value;
+  if(k15m.status==='fulfilled' && k15m.value) OV[ovFocusCoin].k15m = k15m.value;
+
+  computeOverviewScores();
+}
+
+// ── Score computation for all coins ──
+function computeOverviewScores(){
+  Object.keys(COINS).forEach(key => {
+    const ov = OV[key];
+    ['1h','4h'].forEach(tf => {
+      const kl = tf==='1h' ? ov.k1h : ov.k4h;
+      if(!kl || kl.length < 20) return;
+      // Temporarily swap state for computeTF
+      const saved = { fr:S.fr, ls:S.ls, fg:S.fg, oiVal:S.oiVal, oiPrev:S.oiPrev };
+      const savedKL = KL[tf];
+      S.fr = ov.fr; S.ls = ov.ls; S.fg = ov.fg;
+      S.oiVal = ov.oiVal; S.oiPrev = ov.oiPrev;
+      KL[tf] = () => kl;
+      try{
+        const r = computeTF(tf);
+        ov.tfScores[tf] = r.score;
+        ov.tfSignals[tf] = r.signal;
+        ov.tfInds[tf] = r.inds;
+      }catch(e){}
+      // Restore
+      S.fr=saved.fr; S.ls=saved.ls; S.fg=saved.fg;
+      S.oiVal=saved.oiVal; S.oiPrev=saved.oiPrev;
+      KL[tf] = savedKL;
+    });
+    const s1h = ov.tfScores['1h'] || 50;
+    const s4h = ov.tfScores['4h'] || 50;
+    ov.composite = Math.round((s1h * 2 + s4h * 3) / 5);
+    ov.signal = ov.composite >= 65 ? 'LONG' : ov.composite <= 35 ? 'SHORT' : 'WAIT';
+    ov.confidence = calcOvConfidence(key);
+    ov.persistence = calcOvPersistence(key);
+  });
+}
+
+// ── Confidence: TF agreement + score extremity ──
+function calcOvConfidence(key){
+  const ov = OV[key];
+  const scores = Object.values(ov.tfScores);
+  if(scores.length < 2) return 50;
+  const sigs = scores.map(s => s >= 65 ? 'L' : s <= 35 ? 'S' : 'W');
+  const dom = sigs.filter(s => s !== 'W');
+  const agree = dom.length > 0 ? dom.filter(s => s === dom[0]).length / scores.length * 100 : 30;
+  const ext = Math.abs(ov.composite - 50) * 2;
+  return Math.round(Math.min(99, agree * 0.6 + ext * 0.4));
+}
+
+// ── Persistence: ATR-based volatility → stability ──
+function calcOvPersistence(key){
+  const k1h = OV[key].k1h;
+  if(!k1h || k1h.length < 5) return 50;
+  const atr = calcATR(k1h, 5);
+  const last = parseFloat(k1h[k1h.length-1][4]);
+  const atrPct = (atr / last) * 100;
+  return Math.round(Math.max(30, Math.min(85, 90 - atrPct * 30)));
+}
+
+// ── Range position for a kline set ──
+function calcOvRangePos(klines){
+  if(!klines || klines.length < 10) return null;
+  const closes = klines.map(k => parseFloat(k[4]));
+  const highs = klines.map(k => parseFloat(k[2]));
+  const lows = klines.map(k => parseFloat(k[3]));
+  const last = closes[closes.length-1];
+  const hi = Math.max(...highs), lo = Math.min(...lows);
+  const range = hi - lo;
+  const pct = range > 0 ? ((last - lo) / range) * 100 : 50;
+  const sma20 = calcSMA(closes, Math.min(20, closes.length));
+  const devPct = ((last - sma20) / sma20) * 100;
+  let status = 'mid';
+  if(pct > 95) status = 'break-up';
+  else if(pct > 80) status = 'high';
+  else if(pct < 5) status = 'break-down';
+  else if(pct < 20) status = 'low';
+  return { pct: Math.round(pct), devPct, status };
+}
+
+// ── Overview select focus coin ──
+function ovSelectCoin(key){
+  ovFocusCoin = key;
+  // Re-fetch 5m/15m for new focus
+  const fp = COINS[key].pair;
+  Promise.allSettled([
+    safeFetch(`https://api.binance.com/api/v3/klines?symbol=${fp}&interval=5m&limit=50`),
+    safeFetch(`https://api.binance.com/api/v3/klines?symbol=${fp}&interval=15m&limit=50`),
+  ]).then(([k5m, k15m]) => {
+    if(k5m.status==='fulfilled' && k5m.value) OV[key].k5m = k5m.value;
+    if(k15m.status==='fulfilled' && k15m.value) OV[key].k15m = k15m.value;
+    renderOverview();
+  });
+  renderOverview();
+}
+
+// ── Init overview ──
+async function initOverview(){
+  // Show loading state
+  document.getElementById('ovInsightText').textContent = 'データ取得中...';
+  await fetchOverviewData();
+  renderOverview();
+  if(ovInterval) clearInterval(ovInterval);
+  ovInterval = setInterval(async () => {
+    if(!overviewVisible) return;
+    await fetchOverviewData();
+    renderOverview();
+  }, 10000);
+}
+
+// ── Main render function ──
+function renderOverview(){
+  renderOvClock();
+  renderOvHeatmap();
+  renderOvGauge();
+  renderOvInsight();
+  renderOvBadges();
+  renderOvRange();
+  renderOvBot();
+  renderOvStatus();
+  renderOvDrillBadges();
+}
+
+// ── Clock ──
+function renderOvClock(){
+  if(!ovStartTime) return;
+  const diff = Date.now() - ovStartTime;
+  const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+  const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  const el = document.getElementById('ovClock');
+  if(el) el.textContent = `${h}:${m}:${s}`;
+}
+
+// ── Heatmap ──
+function renderOvHeatmap(){
+  Object.keys(COINS).forEach(key => {
+    const ov = OV[key];
+    const cell = document.getElementById(`ov-${key}`);
+    if(!cell) return;
+    // Color class
+    cell.className = `ov-coin ${ov.signal==='LONG'?'bull':ov.signal==='SHORT'?'bear':'neut'}${key===ovFocusCoin?' focused':''}`;
+    // Price
+    const priceEl = document.getElementById(`ovPrice-${key}`);
+    if(priceEl) priceEl.textContent = ov.price > 0 ? '$'+ov.price.toLocaleString('en',{maximumFractionDigits:2}) : '--';
+    // Arrow
+    const arrowEl = document.getElementById(`ovArrow-${key}`);
+    if(arrowEl){
+      arrowEl.textContent = ov.pctChg > 0 ? '↗' : ov.pctChg < 0 ? '↘' : '→';
+      arrowEl.style.color = ov.pctChg > 0 ? 'var(--green)' : ov.pctChg < 0 ? 'var(--red)' : 'var(--yellow)';
+    }
+    // Score
+    const scoreEl = document.getElementById(`ovScore-${key}`);
+    if(scoreEl) scoreEl.textContent = `TRADING SCORE ${ov.composite}/100`;
+    // Signal badge
+    const sigEl = document.getElementById(`ovSig-${key}`);
+    if(sigEl){
+      sigEl.textContent = ov.signal;
+      sigEl.className = `ov-coin-signal ${ov.signal}`;
+    }
+    // Sparkline
+    drawOvSparkline(`ovSpark-${key}`, ov.sparkData, ov.signal==='LONG'?'rgba(0,255,136,.7)':ov.signal==='SHORT'?'rgba(255,45,85,.7)':'rgba(255,214,10,.6)');
+  });
+}
+
+// ── Sparkline canvas ──
+function drawOvSparkline(canvasId, data, color){
+  const c = document.getElementById(canvasId);
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  ctx.clearRect(0,0,w,h);
+  if(!data || data.length < 2) return;
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  // Fill gradient
+  const grad = ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0, color);
+  grad.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  data.forEach((v,i) => {
+    const x = (i/(data.length-1))*w;
+    const y = h - ((v-min)/range)*h;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  // Close for fill
+  ctx.lineTo(w, h);
+  ctx.lineTo(0, h);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+  // Stroke line
+  ctx.beginPath();
+  data.forEach((v,i) => {
+    const x = (i/(data.length-1))*w;
+    const y = h - ((v-min)/range)*h;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.2;
+  ctx.stroke();
+}
+
+// ── Gauge ──
+function renderOvGauge(){
+  const ov = OV[ovFocusCoin];
+  const composite = ov.composite;
+  const sig = ov.signal;
+  const sigColor = sig==='LONG'?'var(--green)':sig==='SHORT'?'var(--red)':'var(--yellow)';
+  // Arc
+  const arc = document.getElementById('ovGaugeArc');
+  if(arc){
+    const offset = 251.3 * (1 - composite/100);
+    arc.setAttribute('stroke-dashoffset', offset.toFixed(1));
+    arc.setAttribute('stroke', sig==='LONG'?'#00ff88':sig==='SHORT'?'#ff2d55':'#ffd60a');
+  }
+  // Needle angle: -90(0) → 0(50) → +90(100)
+  const needle = document.getElementById('ovGaugeNeedle');
+  if(needle){
+    const deg = (composite/100)*180 - 90;
+    needle.style.transform = `rotate(${deg}deg)`;
+  }
+  // Score number
+  const numEl = document.getElementById('ovGaugeNum');
+  if(numEl){ numEl.textContent = composite; numEl.setAttribute('fill', sig==='LONG'?'#00ff88':sig==='SHORT'?'#ff2d55':'#ffd60a'); }
+  // Signal label
+  const sigEl = document.getElementById('ovGaugeSig');
+  if(sigEl){ sigEl.textContent = sig; sigEl.setAttribute('fill', sig==='LONG'?'#00ff88':sig==='SHORT'?'#ff2d55':'#ffd60a'); }
+
+  // Gauge side text
+  const trendLabel = composite >= 80 ? 'STRONGLY BULLISH' : composite >= 65 ? 'BULLISH' : composite <= 20 ? 'STRONGLY BEARISH' : composite <= 35 ? 'BEARISH' : 'NEUTRAL';
+  const leftEl = document.getElementById('ovGaugeLeft');
+  if(leftEl){
+    leftEl.innerHTML = `SIGNAL: <span style="color:${sigColor};font-weight:700;">${sig}</span><br>TREND: <span style="color:${sigColor};font-weight:700;">${trendLabel}</span>`;
+  }
+  const rightEl = document.getElementById('ovGaugeRight');
+  if(rightEl){
+    rightEl.innerHTML = `SIGNAL: <span style="color:${sigColor};font-weight:700;">${sig}</span><br><span style="color:${sigColor};font-weight:700;">${trendLabel}</span>`;
+  }
+
+  // Gauge meta
+  const volLabel = ov.persistence >= 70 ? 'LOW' : ov.persistence >= 50 ? 'MEDIUM' : 'HIGH';
+  const volColor = ov.persistence >= 70 ? 'var(--green)' : ov.persistence >= 50 ? 'var(--yellow)' : 'var(--red)';
+  const metaL = document.getElementById('ovMetaLeft');
+  if(metaL){
+    metaL.innerHTML = `VOLATILITY: <span style="color:${volColor};font-weight:700;">${volLabel}</span><br>` +
+      `CONFIDENCE: <span style="color:${ov.confidence>=70?'var(--green)':ov.confidence>=50?'var(--yellow)':'var(--red)'};font-weight:700;">${ov.confidence}%</span><br>` +
+      `TIME HORIZON: <span style="color:var(--accent);font-weight:700;">4H</span><br>` +
+      `DATA-SYNC: <span style="color:var(--green);font-weight:700;">SYNCED</span>`;
+  }
+  const metaR = document.getElementById('ovMetaRight');
+  if(metaR){
+    metaR.innerHTML = `VOLATILITY: <span style="color:${volColor};font-weight:700;">${volLabel}</span><br>` +
+      `CONFIDENCE: <span style="color:${ov.confidence>=70?'var(--green)':ov.confidence>=50?'var(--yellow)':'var(--red)'};font-weight:700;">${ov.confidence}%</span><br>` +
+      `TIME HORIZON: <span style="color:var(--accent);font-weight:700;">4H</span><br>` +
+      `DATA-SYNC: <span style="color:var(--green);font-weight:700;">SYNCED</span>`;
+  }
+}
+
+// ── AI Insight ──
+function renderOvInsight(){
+  const btc = OV.BTC;
+  const focus = OV[ovFocusCoin];
+  const rules = [
+    { cond: () => {
+        const allLong = Object.keys(OV).every(k => OV[k].signal === 'LONG');
+        return allLong;
+      }, text: '全4コインがLONGシグナル。市場全体が強気ムード。順張りロングが有効な局面。ただし過熱に注意。' },
+    { cond: () => {
+        const allShort = Object.keys(OV).every(k => OV[k].signal === 'SHORT');
+        return allShort;
+      }, text: '全4コインがSHORTシグナル。市場全体が弱気。リスクオフモード。ショート or キャッシュ退避推奨。' },
+    { cond: () => btc.fr < -0.015, text: `BTC FR ${(btc.fr*100).toFixed(3)}% — マイナスFR点灯中。ショートポジション過多でスクイーズリスクあり。ロング側有利。` },
+    { cond: () => btc.fr > 0.05, text: `BTC FR ${(btc.fr*100).toFixed(3)}% — FR高騰中。ロング過多で清算カスケードリスク。慎重にショート検討。` },
+    { cond: () => btc.fg <= 25, text: `Fear & Greed ${btc.fg} — 極度の恐怖。歴史的に絶好の買い場候補。段階的なロングエントリーを検討。` },
+    { cond: () => btc.fg >= 80, text: `Fear & Greed ${btc.fg} — 極度の強欲。利確・ポジション縮小推奨。逆張りショートも視野に。` },
+    { cond: () => focus.confidence >= 80, text: `${ovFocusCoin} シグナル確度${focus.confidence}% — 高確度シグナル。TF間の一致度が高く、エントリーチャンス。` },
+    { cond: () => focus.persistence >= 75 && focus.signal !== 'WAIT', text: `${ovFocusCoin} 継続率${focus.persistence}% — 低ボラ環境で${focus.signal}シグナルの継続が見込まれる。15分以内の安定性高。` },
+    { cond: () => {
+        const mixed = Object.keys(OV).filter(k => OV[k].signal === 'LONG').length === 2 && Object.keys(OV).filter(k => OV[k].signal === 'SHORT').length === 2;
+        return mixed;
+      }, text: '市場が二分化。一部コインは強気、一部は弱気。個別コインの選別が重要。全体方向感なし。' },
+    { cond: () => true, text: '特記すべき異常値なし。テクニカルシグナルとレンジポジションを確認し、個別判断を。' },
+  ];
+  const text = rules.find(r => r.cond())?.text || '';
+  const el = document.getElementById('ovInsightText');
+  if(el) el.textContent = text;
+}
+
+// ── Mini Badges ──
+function renderOvBadges(){
+  const ov = OV[ovFocusCoin];
+  // FR
+  const frPct = (ov.fr*100);
+  const frEl = document.getElementById('ovValFR');
+  if(frEl){
+    frEl.textContent = (frPct>=0?'+':'') + frPct.toFixed(2) + '%';
+    frEl.style.color = frPct > 0.03 ? 'var(--red)' : frPct < -0.01 ? 'var(--green)' : 'var(--yellow)';
+  }
+  // L/S
+  const lsEl = document.getElementById('ovValLS');
+  if(lsEl){
+    const ratio = ov.ls / (100 - ov.ls);
+    lsEl.textContent = ratio.toFixed(2);
+    lsEl.style.color = ov.ls > 60 ? 'var(--red)' : ov.ls < 40 ? 'var(--green)' : 'var(--accent)';
+  }
+  // FGI
+  const fgiEl = document.getElementById('ovValFGI');
+  if(fgiEl){
+    fgiEl.textContent = ov.fg;
+    fgiEl.style.color = ov.fg >= 75 ? 'var(--red)' : ov.fg <= 25 ? 'var(--green)' : 'var(--yellow)';
+  }
+  // OI
+  const oiEl = document.getElementById('ovValOI');
+  if(oiEl){
+    const oiChg = ov.oiPrev > 0 ? ((ov.oiVal - ov.oiPrev)/ov.oiPrev*100) : 0;
+    oiEl.textContent = (oiChg>=0?'+':'') + oiChg.toFixed(1) + '%';
+    oiEl.style.color = Math.abs(oiChg) > 5 ? 'var(--red)' : Math.abs(oiChg) > 2 ? 'var(--yellow)' : 'var(--green)';
+  }
+}
+
+// ── Range Bars ──
+function renderOvRange(){
+  const ov = OV[ovFocusCoin];
+  document.getElementById('ovRangeCoin')&&(document.getElementById('ovRangeCoin').textContent = ovFocusCoin);
+  const bars = document.getElementById('ovRangeBars');
+  if(!bars) return;
+  const tfs = [
+    { label:'5m', kl:ov.k5m },
+    { label:'15m', kl:ov.k15m },
+    { label:'1h', kl:ov.k1h },
+    { label:'4h', kl:ov.k4h },
+  ];
+  let html = '';
+  tfs.forEach(tf => {
+    const r = calcOvRangePos(tf.kl);
+    if(!r){
+      html += `<div class="ov-range-row"><span class="ov-range-tf">${tf.label}</span><span style="color:var(--dim);font-size:.48rem;">データなし</span></div>`;
+      return;
+    }
+    const statusLabel = {
+      'break-up':'BREAK↑','high':'HIGH','mid':'MID','low':'LOW','break-down':'BREAK↓'
+    }[r.status] || 'MID';
+    const statusColor = {
+      'break-up':'var(--accent)','high':'var(--red)','mid':'var(--yellow)','low':'var(--green)','break-down':'var(--red)'
+    }[r.status] || 'var(--yellow)';
+    const devColor = r.devPct > 0.5 ? 'var(--green)' : r.devPct < -0.5 ? 'var(--red)' : 'var(--dim)';
+    html += `<div class="ov-range-row">
+      <span class="ov-range-tf">${tf.label}</span>
+      <div class="ov-range-bar"><div class="ov-range-fill ${r.status}" style="width:${Math.max(2,r.pct)}%;"></div></div>
+      <span class="ov-range-pct" style="color:${statusColor};">${r.pct}%</span>
+      <span class="ov-range-status" style="color:${statusColor};">${statusLabel}</span>
+      <span class="ov-range-dev" style="color:${devColor};">SMA${r.devPct>=0?'+':''}${r.devPct.toFixed(2)}%</span>
+    </div>`;
+  });
+  bars.innerHTML = html;
+}
+
+// ── Bot Status ──
+function renderOvBot(){
+  const el = document.getElementById('ovBot');
+  if(!el) return;
+  try{
+    const cats = getCategoryTopBots();
+    let best = null;
+    Object.values(cats).forEach(cat => {
+      if(cat.bots[0]){
+        const b = cat.bots[0];
+        if(!best || b.rate > best.rate || (b.rate === best.rate && b.bs.totalPnlPct > best.bs.totalPnlPct)) best = b;
+      }
+    });
+    if(best && best.bs){
+      const pos = best.bs.position;
+      const posStr = pos ? `<span style="color:${pos.side==='LONG'?'var(--green)':'var(--red)'};">${pos.side} @ $${pos.entryPrice.toLocaleString()}</span>` : '<span style="color:var(--dim);">NO POSITION</span>';
+      const pnl = best.bs.totalPnlPct;
+      el.innerHTML = `<strong>${best.def.name}</strong> | POSITION: ${posStr} | PNL: <span style="color:${pnl>=0?'var(--green)':'var(--red)'};">${pnl>=0?'+':''}${pnl.toFixed(1)}%</span>`;
+    } else {
+      el.textContent = 'Bot Arena データなし';
+    }
+  }catch(e){
+    el.textContent = 'Bot Arena データ取得中...';
+  }
+}
+
+// ── Bottom Status ──
+function renderOvStatus(){
+  // Event countdown
+  const now = new Date();
+  const events = [
+    {label:'NFP', t:new Date('2026-03-07T13:30:00Z')},
+    {label:'CPI', t:new Date('2026-03-12T13:30:00Z')},
+    {label:'FOMC', t:new Date('2026-03-19T18:00:00Z')},
+  ];
+  // Find next upcoming event
+  let nextEvent = events.find(e => e.t > now);
+  if(!nextEvent) nextEvent = {label:'Q-END', t:new Date('2026-03-31T00:00:00Z')};
+  const diff = nextEvent.t - now;
+  let evStr = nextEvent.label + ': ';
+  if(diff < 0) evStr += '終了';
+  else {
+    const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000), m = Math.floor((diff%3600000)/60000);
+    evStr += d > 0 ? `${d}日 ${h}h` : `${h}h ${m}m`;
+  }
+  const evEl = document.getElementById('ovStatusEvent');
+  if(evEl) evEl.textContent = evStr;
+
+  // Risk level
+  const riskEl = document.getElementById('ovStatusRisk');
+  if(riskEl){
+    const btc = OV.BTC;
+    const risk = btc.fg >= 80 || btc.fg <= 15 ? 'HIGH' : btc.fr > 0.04 || btc.fr < -0.02 ? 'HIGH' : btc.persistence < 40 ? 'MEDIUM' : 'LOW';
+    const riskColor = risk === 'HIGH' ? 'var(--red)' : risk === 'MEDIUM' ? 'var(--yellow)' : 'var(--green)';
+    riskEl.innerHTML = `RISK LEVEL: <span style="color:${riskColor};font-weight:700;">${risk}</span>`;
+  }
+
+  // TF alignment
+  const tfEl = document.getElementById('ovStatusTF');
+  if(tfEl){
+    const ov = OV[ovFocusCoin];
+    const s1h = ov.tfSignals['1h'] || 'WAIT';
+    const s4h = ov.tfSignals['4h'] || 'WAIT';
+    const c1h = s1h==='LONG'?'var(--green)':s1h==='SHORT'?'var(--red)':'var(--yellow)';
+    const c4h = s4h==='LONG'?'var(--green)':s4h==='SHORT'?'var(--red)':'var(--yellow)';
+    tfEl.innerHTML = `TF: <span style="color:${c1h};">1H</span> / <span style="color:${c4h};">4H</span>`;
+  }
+}
+
+// ── Drill-down badges ──
+function renderOvDrillBadges(){
+  const ov = OV[ovFocusCoin];
+  // Signal badge
+  const sigBadge = document.getElementById('ovDrillSignalBadge');
+  if(sigBadge){
+    sigBadge.textContent = ov.signal;
+    sigBadge.className = `ov-drill-badge ${ov.signal==='LONG'?'bull':ov.signal==='SHORT'?'bear':'neut'}`;
+  }
+  // Tech badge
+  const techBadge = document.getElementById('ovDrillTechBadge');
+  if(techBadge){
+    const rsi = ov.tfInds['1h']?.rsi;
+    techBadge.textContent = rsi ? `RSI ${rsi.val||'--'}` : '--';
+    techBadge.className = `ov-drill-badge ${rsi?.cls==='bull'?'bull':rsi?.cls==='bear'?'bear':'neut'}`;
+  }
+  // Sentiment badge
+  const sentiBadge = document.getElementById('ovDrillSentiBadge');
+  if(sentiBadge){
+    sentiBadge.textContent = `FGI ${ov.fg}`;
+    sentiBadge.className = `ov-drill-badge ${ov.fg>=65?'bear':ov.fg<=35?'bull':'neut'}`;
+  }
+  // Macro badge
+  const macroBadge = document.getElementById('ovDrillMacroBadge');
+  if(macroBadge){
+    const now = new Date();
+    const events = [
+      {label:'NFP', t:new Date('2026-03-07T13:30:00Z')},
+      {label:'CPI', t:new Date('2026-03-12T13:30:00Z')},
+      {label:'FOMC', t:new Date('2026-03-19T18:00:00Z')},
+    ];
+    const next = events.find(e => e.t > now);
+    const diff = next ? (next.t - now)/86400000 : 99;
+    macroBadge.textContent = next ? next.label : 'Q-END';
+    macroBadge.className = `ov-drill-badge ${diff < 2 ? 'bear' : diff < 5 ? 'neut' : 'bull'}`;
+  }
+}
+
+// ── Drill-down toggle ──
+function ovToggleDrill(category){
+  const card = document.getElementById(`ovDrill${category}`);
+  if(!card) return;
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+  if(!wasOpen) renderOvDrillContent(category);
+}
+
+// ── Drill-down content rendering ──
+function renderOvDrillContent(category){
+  const ov = OV[ovFocusCoin];
+  const bodyEl = document.getElementById(`ovDrill${category}Body`);
+  if(!bodyEl) return;
+
+  if(category === 'Signal'){
+    // TF scores with confidence
+    let html = `<div class="ov-dd-note">${ovFocusCoin} — 各時間足シグナル（確度: ${ov.confidence}% / 継続率: ${ov.persistence}%）</div>`;
+    ['1h','4h'].forEach(tf => {
+      const sc = ov.tfScores[tf] || 50;
+      const sig = ov.tfSignals[tf] || 'WAIT';
+      const cls = sig==='LONG'?'bull':sig==='SHORT'?'bear':'neut';
+      html += `<div class="ov-dd-row">
+        <span class="ov-dd-label">${tf}</span>
+        <div class="ov-dd-bar"><div class="ov-dd-fill ${cls}" style="width:${sc}%;"></div></div>
+        <span class="ov-dd-val" style="color:${sig==='LONG'?'var(--green)':sig==='SHORT'?'var(--red)':'var(--yellow)'};">${sc}</span>
+        <span class="ov-dd-sig ${sig}">${sig}</span>
+      </div>`;
+    });
+    // All coins comparison
+    html += `<div class="ov-dd-note" style="margin-top:8px;">全コイン比較（Composite）</div>`;
+    Object.keys(COINS).forEach(key => {
+      const o = OV[key];
+      const cls = o.signal==='LONG'?'bull':o.signal==='SHORT'?'bear':'neut';
+      html += `<div class="ov-dd-row">
+        <span class="ov-dd-label">${key}</span>
+        <div class="ov-dd-bar"><div class="ov-dd-fill ${cls}" style="width:${o.composite}%;"></div></div>
+        <span class="ov-dd-val" style="color:${o.signal==='LONG'?'var(--green)':o.signal==='SHORT'?'var(--red)':'var(--yellow)'};">${o.composite}</span>
+        <span class="ov-dd-sig ${o.signal}">${o.signal}</span>
+        <span class="ov-dd-conf">確度${o.confidence}%</span>
+      </div>`;
+    });
+    bodyEl.innerHTML = html;
+  }
+  else if(category === 'Tech'){
+    // Indicators + Range
+    let html = `<div class="ov-dd-note">${ovFocusCoin} — テクニカル指標 (1H/4H)</div>`;
+    ['1h','4h'].forEach(tf => {
+      const inds = ov.tfInds[tf];
+      if(!inds) return;
+      html += `<div style="font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--accent);margin:6px 0 2px;font-weight:700;">${tf.toUpperCase()}</div>`;
+      Object.entries(inds).forEach(([key, ind]) => {
+        const color = ind.cls==='bull'?'var(--green)':ind.cls==='bear'?'var(--red)':'var(--yellow)';
+        html += `<div class="ov-dd-row">
+          <span class="ov-dd-label">${key.toUpperCase()}</span>
+          <span style="color:${color};font-weight:700;flex:1;">${ind.badge||''}</span>
+          <span style="color:var(--dim);font-size:.48rem;">${ind.why||''}</span>
+        </div>`;
+      });
+    });
+    // Range positions
+    html += `<div class="ov-dd-note" style="margin-top:8px;">レンジポジション — ${ovFocusCoin}</div>`;
+    [{ label:'5m', kl:ov.k5m },{ label:'15m', kl:ov.k15m },{ label:'1h', kl:ov.k1h },{ label:'4h', kl:ov.k4h }].forEach(tf => {
+      const r = calcOvRangePos(tf.kl);
+      if(!r) return;
+      const cls = r.status==='high'||r.status==='break-up'?'bear':r.status==='low'||r.status==='break-down'?'bull':'neut';
+      html += `<div class="ov-dd-row">
+        <span class="ov-dd-label">${tf.label}</span>
+        <div class="ov-dd-bar"><div class="ov-dd-fill ${cls}" style="width:${r.pct}%;"></div></div>
+        <span class="ov-dd-val">${r.pct}%</span>
+        <span class="ov-dd-conf">SMA${r.devPct>=0?'+':''}${r.devPct.toFixed(2)}%</span>
+      </div>`;
+    });
+    bodyEl.innerHTML = html;
+  }
+  else if(category === 'Senti'){
+    let html = `<div class="ov-dd-note">${ovFocusCoin} — センチメント指標</div>`;
+    // FR
+    const frPct = (ov.fr*100);
+    const frColor = frPct > 0.03 ? 'var(--red)' : frPct < -0.01 ? 'var(--green)' : 'var(--yellow)';
+    html += `<div class="ov-dd-row"><span class="ov-dd-label">FR</span><span style="color:${frColor};font-weight:700;flex:1;">${(frPct>=0?'+':'')+frPct.toFixed(4)}%</span><span style="color:var(--dim);font-size:.48rem;">${frPct>0.03?'ロング過多 — 反転注意':frPct<-0.01?'ショート過多 — スクイーズ候補':'中立水準'}</span></div>`;
+    // L/S
+    const lsColor = ov.ls > 60 ? 'var(--red)' : ov.ls < 40 ? 'var(--green)' : 'var(--yellow)';
+    html += `<div class="ov-dd-row"><span class="ov-dd-label">L/S</span><span style="color:${lsColor};font-weight:700;flex:1;">${ov.ls.toFixed(1)}% Long</span><span style="color:var(--dim);font-size:.48rem;">${ov.ls>60?'ロング偏り':ov.ls<40?'ショート偏り':'均衡'}</span></div>`;
+    // FGI
+    const fgColor = ov.fg >= 75 ? 'var(--red)' : ov.fg <= 25 ? 'var(--green)' : 'var(--yellow)';
+    html += `<div class="ov-dd-row"><span class="ov-dd-label">FGI</span><span style="color:${fgColor};font-weight:700;flex:1;">${ov.fg}</span><span style="color:var(--dim);font-size:.48rem;">${ov.fg>=75?'極度の強欲':ov.fg<=25?'極度の恐怖':ov.fg>=50?'やや強欲':'やや恐怖'}</span></div>`;
+    // OI
+    const oiChg = ov.oiPrev > 0 ? ((ov.oiVal-ov.oiPrev)/ov.oiPrev*100) : 0;
+    html += `<div class="ov-dd-row"><span class="ov-dd-label">OI</span><span style="color:${Math.abs(oiChg)>3?'var(--orange)':'var(--dim)'};font-weight:700;flex:1;">${(oiChg>=0?'+':'')+oiChg.toFixed(1)}%</span><span style="color:var(--dim);font-size:.48rem;">${Math.abs(oiChg)>5?'大幅変動':Math.abs(oiChg)>2?'やや変動':'安定'}</span></div>`;
+    // Cross-coin sentiment
+    html += `<div class="ov-dd-note" style="margin-top:8px;">全コイン FR 比較</div>`;
+    Object.keys(COINS).forEach(key => {
+      const o = OV[key];
+      const fr = (o.fr*100);
+      const c = fr > 0.03 ? 'var(--red)' : fr < -0.01 ? 'var(--green)' : 'var(--yellow)';
+      html += `<div class="ov-dd-row"><span class="ov-dd-label">${key}</span><span style="color:${c};font-weight:700;">${(fr>=0?'+':'')+fr.toFixed(4)}%</span></div>`;
+    });
+    bodyEl.innerHTML = html;
+  }
+  else if(category === 'Macro'){
+    let html = `<div class="ov-dd-note">経済イベント カウントダウン</div>`;
+    const now = new Date();
+    const events = [
+      {label:'NFP 雇用統計', t:new Date('2026-03-07T13:30:00Z'), impact:'両方向リスク'},
+      {label:'CPI インフレ', t:new Date('2026-03-12T13:30:00Z'), impact:'両方向リスク'},
+      {label:'FOMC 金利', t:new Date('2026-03-19T18:00:00Z'), impact:'上昇圧力'},
+      {label:'四半期末', t:new Date('2026-03-31T00:00:00Z'), impact:'下落圧力'},
+    ];
+    events.forEach(ev => {
+      const diff = ev.t - now;
+      let timeStr = '終了';
+      let color = 'var(--dim)';
+      if(diff > 0){
+        const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000);
+        timeStr = d > 0 ? `${d}日 ${h}h` : `${h}h`;
+        color = d < 2 ? 'var(--red)' : d < 5 ? 'var(--yellow)' : 'var(--accent)';
+      }
+      html += `<div class="ov-dd-row"><span class="ov-dd-label" style="width:80px;">${ev.label}</span><span style="color:${color};font-weight:700;flex:1;">${timeStr}</span><span style="color:var(--dim);font-size:.48rem;">${ev.impact}</span></div>`;
+    });
+    // Halving cycle note
+    html += `<div class="ov-dd-note" style="margin-top:8px;">半減期サイクル: 2024年4月から約11ヶ月。過去パターンでは半減期後6〜18ヶ月が最大上昇局面。現在は中盤に相当。</div>`;
+    bodyEl.innerHTML = html;
+  }
+}
 
 // ═══════════════════════════════════════════════
 // BOT EVALUATION ENGINE
