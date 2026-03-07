@@ -4106,7 +4106,127 @@ const BOT_DEFS = [
 ];
 
 // ── Mother bot IDs (for child dormancy mechanism) ──
-const MOTHER_BOT_IDS = BOT_DEFS.map(d=>d.id);
+// 初期マザーbot + 昇格されたbot
+let MOTHER_BOT_IDS = BOT_DEFS.map(d=>d.id);
+// 昇格されたbotの記録（localStorageから復元）
+let promotedBots = []; // [{id, promotedFrom, promotedAt, frozenParams}]
+
+function getPromotedStorageKey(){ return `promotedBots_${currentCoin}_v1`; }
+function loadPromotedBots(){
+  try{ promotedBots = JSON.parse(localStorage.getItem(getPromotedStorageKey())) || []; }catch(e){ promotedBots = []; }
+  // Restore promoted bots to MOTHER_BOT_IDS
+  promotedBots.forEach(pb=>{ if(!MOTHER_BOT_IDS.includes(pb.id)) MOTHER_BOT_IDS.push(pb.id); });
+  // Generate children from promoted bots and add to ALL_BOTS if not already there
+  promotedBots.forEach(pb=>{
+    const parentDef = ALL_BOTS.find(d=>d.id===pb.id);
+    if(!parentDef) return;
+    // Mark as promoted mother
+    parentDef._promoted = true;
+    parentDef._promotedAt = pb.promotedAt;
+    // Restore frozen params as default for child generation
+    if(pb.frozenParams) BOT_DEFAULT_PARAMS[pb.id] = JSON.parse(JSON.stringify(pb.frozenParams));
+    CHILD_VARIANTS.forEach(v=>{
+      const childId = pb.id + v.suffix;
+      if(!ALL_BOTS.find(d=>d.id===childId)){
+        ALL_BOTS.push({
+          id: childId,
+          name: parentDef.name + v.label,
+          emoji: parentDef.emoji,
+          tf: parentDef.tf,
+          style: parentDef.style,
+          cat: parentDef.cat,
+          strategy: pb.id,
+          motherId: pb.id,
+          isChild: true,
+          variantLabel: v.label,
+          paramMod: v.paramMod,
+          desc: (parentDef.desc||'') + '(' + v.label + ')',
+          philosophy: parentDef.philosophy,
+          quotes: parentDef.quotes,
+          _fromPromoted: true,
+        });
+      }
+    });
+  });
+}
+function savePromotedBots(){
+  try{ localStorage.setItem(getPromotedStorageKey(), JSON.stringify(promotedBots)); }catch(e){}
+}
+
+// 子botをマザーbotに昇格させる
+function promoteChildToMother(childId){
+  if(!isAdminMode) return;
+  const def = ALL_BOTS.find(d=>d.id===childId);
+  const bs = botStates[childId];
+  if(!def || !bs || !def.isChild) return;
+
+  // Confirm
+  const total = bs.totalWins + bs.totalLosses;
+  if(total < 3){
+    alert('最低3回以上の取引がないと昇格できません。');
+    return;
+  }
+  const rate = (bs.totalWins/total*100).toFixed(1);
+  if(!confirm(`${def.emoji} ${def.name}（勝率${rate}% / P&L${bs.totalPnlPct>=0?'+':''}${bs.totalPnlPct.toFixed(2)}%）をマザーbotに昇格させますか？\n\n昇格すると:\n・パラメータが固定されPDCA改善の対象外になります\n・この子botから新たに5つの子バリアントが生成されます`)) return;
+
+  // Freeze current params as the new "default" for this promoted mother
+  const frozenParams = JSON.parse(JSON.stringify(bs.params));
+
+  // Register as promoted
+  promotedBots.push({
+    id: childId,
+    promotedFrom: def.motherId,
+    promotedAt: new Date().toISOString(),
+    frozenParams,
+    originalName: def.name,
+  });
+
+  // Add to MOTHER_BOT_IDS
+  if(!MOTHER_BOT_IDS.includes(childId)) MOTHER_BOT_IDS.push(childId);
+
+  // Mark definition
+  def._promoted = true;
+  def._promotedAt = new Date().toISOString();
+
+  // Store frozen params as default for child generation
+  BOT_DEFAULT_PARAMS[childId] = frozenParams;
+
+  // Generate 5 new children from this promoted bot
+  CHILD_VARIANTS.forEach(v=>{
+    const newChildId = childId + v.suffix;
+    if(!ALL_BOTS.find(d=>d.id===newChildId)){
+      ALL_BOTS.push({
+        id: newChildId,
+        name: def.name + v.label,
+        emoji: def.emoji,
+        tf: def.tf,
+        style: def.style,
+        cat: def.cat,
+        strategy: childId,
+        motherId: childId,
+        isChild: true,
+        variantLabel: v.label,
+        paramMod: v.paramMod,
+        desc: (def.desc||'') + '(' + v.label + ')',
+        philosophy: def.philosophy,
+        quotes: def.quotes,
+        _fromPromoted: true,
+      });
+      // Initialize bot state
+      botStates[newChildId] = createBotState(newChildId);
+      botStates[newChildId].params = generateChildParams(childId, v.paramMod);
+    }
+  });
+
+  // Log the promotion
+  bs.pdcaLog.push({ time:Date.now(), msg:`【昇格】マザーbotに昇格しました。パラメータ固定。5つの子バリアントを生成。` });
+
+  savePromotedBots();
+  saveBotArena();
+  closeAdminBotDetail();
+  if(botArenaVisible) renderBotArena();
+  alert(`${def.emoji} ${def.name} をマザーbotに昇格しました！\n5つの新しい子バリアントが追加されました。`);
+}
 
 // ── Child variant definitions ──
 const CHILD_VARIANTS = [
@@ -4143,8 +4263,8 @@ function generateChildBots(){
   return children;
 }
 const BOT_CHILDREN = generateChildBots();
-// ALL_BOTS = mother (8) + children (8×5=40) = 48 total
-const ALL_BOTS = [...BOT_DEFS, ...BOT_CHILDREN];
+// ALL_BOTS = mother (8) + children (8×5=40) = 48+ total (昇格bot追加で増加)
+let ALL_BOTS = [...BOT_DEFS, ...BOT_CHILDREN];
 
 // Bot parameters (tunable by PDCA)
 const BOT_DEFAULT_PARAMS = {
@@ -4181,12 +4301,14 @@ let botStates = {};  // id -> state object
 function getBAStorageKey(){ return `botArena_${currentCoin}_v2`; }
 
 function initBotArena(){
+  // Load promoted bots first (adds to ALL_BOTS and MOTHER_BOT_IDS)
+  loadPromotedBots();
   // Load from localStorage or create fresh
   const saved = localStorage.getItem(getBAStorageKey());
   if(saved){
     try{ botStates = JSON.parse(saved); }catch(e){ botStates = {}; }
   }
-  // Initialize ALL bots (mothers + children)
+  // Initialize ALL bots (mothers + children + promoted children)
   ALL_BOTS.forEach(def=>{
     if(!botStates[def.id]){
       botStates[def.id] = createBotState(def.id);
@@ -5738,6 +5860,7 @@ function renderSingleBotCard(def, bs, isFull){
   }
 
   const variant = def.isChild ? ` <span style="font-size:.68rem;color:var(--dim);">${def.variantLabel}</span>` : '';
+  const promotedBadge = def._promoted ? ' <span style="font-size:.62rem;color:#f59e0b;">👑昇格</span>' : '';
 
   const adminClick = isAdminMode ? `onclick="showAdminBotDetail('${def.id}')" style="cursor:pointer;"` : '';
 
@@ -5748,7 +5871,7 @@ function renderSingleBotCard(def, bs, isFull){
     return `<div class="ba-bot st-holding ${dirCls}" style="padding:8px 12px;${isAdminMode?'cursor:pointer;':''}" ${adminClick}>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span class="ba-bot-emoji" style="font-size:1rem;">${def.emoji}</span>
-        <span class="ba-bot-name" style="font-size:.88rem;">${def.name}${variant}</span>
+        <span class="ba-bot-name" style="font-size:.88rem;">${def.name}${variant}${promotedBadge}</span>
         <span class="ba-bot-status ${statusCls}">${statusText}</span>
         <span style="color:${pnlCls};font-weight:700;font-size:.82rem;">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</span>
         <span style="color:var(--dim);font-size:.72rem;">${def.cat}</span>
@@ -5760,7 +5883,7 @@ function renderSingleBotCard(def, bs, isFull){
   return `<div class="ba-bot st-${bs.status==='holding'?'holding':bs.status} ${dirCls}" ${adminClick}>
     <div class="ba-bot-top">
       <span class="ba-bot-emoji">${def.emoji}</span>
-      <span class="ba-bot-name">${def.name}${variant}</span>
+      <span class="ba-bot-name">${def.name}${variant}${promotedBadge}</span>
       <span class="ba-bot-cat">${def.cat}</span>
       <span class="ba-bot-status ${statusCls}">${statusText}</span>
       ${isAdminMode?'<span style="font-size:.62rem;color:var(--accent);margin-left:auto;">TAP詳細</span>':''}
@@ -6177,7 +6300,34 @@ function showAdminBotDetail(botId){
     <div style="margin-bottom:16px;">${tradesHtml}</div>
 
     <div style="font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--accent);">🔄 PDCA改善履歴</div>
-    <div style="margin-bottom:8px;">${pdcaHtml}</div>
+    <div style="margin-bottom:16px;">${pdcaHtml}</div>
+
+    ${def.isChild && !def._promoted ? `
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:8px;">
+      <div style="font-size:.82rem;font-weight:600;margin-bottom:8px;color:var(--accent);">👑 マザーbot昇格</div>
+      <div style="font-size:.72rem;color:var(--dim);margin-bottom:10px;">
+        この子botをマザーbotに昇格させると:<br>
+        ・パラメータが固定されPDCA改善の対象外になります<br>
+        ・この子botから新たに5つの子バリアントが自動生成されます<br>
+        ・元のマザーbot（${def.motherId.toUpperCase()}）には影響しません
+      </div>
+      <button onclick="promoteChildToMother('${def.id}')"
+        style="width:100%;padding:12px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;border:none;border-radius:8px;font-weight:700;font-size:.88rem;cursor:pointer;">
+        👑 ${def.name} をマザーbotに昇格させる
+      </button>
+    </div>
+    ` : def._promoted ? `
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:12px;margin-top:8px;">
+      <div style="font-size:.78rem;color:var(--accent);font-weight:600;">👑 昇格済マザーbot</div>
+      <div style="font-size:.72rem;color:var(--dim);">昇格日: ${def._promotedAt ? new Date(def._promotedAt).toLocaleDateString('ja-JP') : '—'}</div>
+      <div style="font-size:.72rem;color:var(--dim);">パラメータ固定 / PDCA改善対象外 / 子bot5体を保有</div>
+    </div>
+    ` : `
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:12px;margin-top:8px;">
+      <div style="font-size:.78rem;color:var(--accent);font-weight:600;">🛡️ オリジナルマザーbot</div>
+      <div style="font-size:.72rem;color:var(--dim);">初期設定保護中 / パラメータ固定 / PDCA改善対象外</div>
+    </div>
+    `}
   `;
 
   document.getElementById('adminBotDetailContent').innerHTML = html;
